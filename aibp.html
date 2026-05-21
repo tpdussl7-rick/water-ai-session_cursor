@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다 — 워터(Water) BXD 노트</title>
+<meta name="description" content="워터(Water) BXD팀이 직접 취재한 첫 번째 AI Best Practice Session 현장 기록. 프롬프트 설계, 비개발자 노코드 시스템 구축, 3일 웹앱 실험까지.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Water BXD팀">
+<meta name="theme-color" content="#0099ff">
+<!-- 배포 후 canonical·og:url·og:image·twitter:image를 절대 URL(https://도메인/...)로 교체하세요 -->
+<link rel="canonical" href="aibp.html">
+<link rel="icon" href="./ilo_face_outline@2x.png" type="image/png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" href="./hero_세션전경.jpeg" as="image" type="image/jpeg">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="워터(Water) BXD Note">
+<meta property="og:title" content="충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다">
+<meta property="og:description" content="워터 BXD팀이 직접 취재한 첫 번째 AI Best Practice Session 현장 기록.">
+<meta property="og:url" content="aibp.html">
+<meta property="og:image" content="hero_세션전경.jpeg">
+<meta property="og:image:alt" content="워터 AI Best Practice Session 첫 회차 현장">
+<meta property="article:published_time" content="2026-05-01">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다">
+<meta name="twitter:description" content="워터 BXD팀이 직접 취재한 첫 번째 AI Best Practice Session 현장 기록.">
+<meta name="twitter:image" content="hero_세션전경.jpeg">
+<meta name="twitter:image:alt" content="워터 AI Best Practice Session 첫 회차 현장">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --ink: #1A1A1A;
+  --ink-2: #2D2D2D;
+  --muted: #707070;
+  --muted-2: #9B9B9B;
+  --line: #E5E5E5;
+  --line-soft: #EFEFEF;
+  --bg: #f9f8fa;
+  --surface: #ffffff;
+  --tip-bg: #e0edff;
+  --tip-border: #0099ff;
+  --note-bg: #ffffff;
+  --note-border: #0099ff;
+  --hl: #C5E7FA;
+  --accent: #0099ff;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  line-height: 1.85;
+  color: var(--ink);
+  background: var(--bg);
+  margin: 0;
+  padding: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 6px 6px;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: max(80px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(80px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+}
+
+@media (max-width: 768px) {
+  .article { padding: max(48px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); }
+  body { font-size: 15px; }
+}
+
+/* ───── Header ───── */
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: clamp(22px, 5vw, 28px);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 16px 0 32px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.meta .author { font-weight: 600; color: var(--ink-2); }
+.meta .dot { color: var(--muted-2); user-select: none; }
+.meta time { font-variant-numeric: tabular-nums; }
+
+/* ───── Hero ───── */
+.hero {
+  margin: 0 0 40px;
+}
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* ───── Body ───── */
+h2 {
+  font-size: 20px;
+  color: var(--ink);
+  margin: 56px 0 16px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+}
+
+.section-num {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+h3 {
+  font-size: 17px;
+  color: var(--ink);
+  margin: 32px 0 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+
+h4 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 24px 0 6px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin: 0 0 18px;
+}
+
+p strong, li strong { color: var(--ink); font-weight: 600; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ───── Highlight ───── */
+.text-highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--hl) 55%);
+  padding: 0 1px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ───── Figures ───── */
+figure {
+  margin: 28px 0;
+  text-align: center;
+}
+figure img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+}
+figcaption {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.figure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 28px 0;
+}
+.figure-grid figure { margin: 0; }
+@media (max-width: 600px) { .figure-grid { grid-template-columns: 1fr; } }
+
+/* ───── Pullquote (simple) ───── */
+.pullquote {
+  margin: 36px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--ink);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  background: none;
+  border-radius: 0;
+}
+.pullquote p { margin: 0; font-size: inherit; font-weight: inherit; color: inherit; line-height: inherit; }
+.pullquote footer,
+.pullquote cite {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  font-style: normal;
+}
+.pullquote footer cite { margin-top: 0; }
+
+/* ───── Tip / Note callouts ───── */
+.callout {
+  margin: 24px 0;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.callout.tip {
+  background: var(--tip-bg);
+  border-left: 3px solid var(--tip-border);
+}
+.callout.note {
+  background: var(--note-bg);
+  border-left: 3px solid var(--note-border);
+}
+.callout strong { font-weight: 600; color: var(--ink); margin-right: 4px; }
+.callout p { margin: 0; font-size: inherit; line-height: inherit; }
+
+/* ───── Lists ───── */
+ul.simple-list, ol.simple-list {
+  margin: 16px 0 24px;
+  padding-left: 20px;
+}
+ul.simple-list li, ol.simple-list li {
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+/* ───── Tech stack (text-only) ───── */
+.tech-list {
+  margin: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.tech-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+@media (max-width: 600px) {
+  .tech-row { grid-template-columns: 1fr; gap: 4px; }
+}
+.tech-row .role {
+  font-weight: 600;
+  color: var(--ink);
+}
+.tech-row .tool {
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+.tech-row .tool strong { color: var(--ink); }
+
+/* ───── Track table (minimal) ───── */
+.track-table {
+  margin: 20px 0 36px;
+  border-top: 1px solid var(--line);
+}
+.track-row {
+  display: grid;
+  grid-template-columns: 28px 130px 1fr;
+  gap: 14px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.track-row.head {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+.track-letter {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 13px;
+}
+.track-presenter { font-weight: 600; color: var(--ink); }
+.track-topic { color: var(--ink-2); line-height: 1.55; }
+@media (max-width: 600px) {
+  .track-row { grid-template-columns: 28px 1fr; }
+  .track-row .track-topic { grid-column: 2; padding-top: 4px; }
+  .track-row.head { display: none; }
+}
+
+/* ───── Code block ───── */
+.code-block {
+  background: var(--ink);
+  color: #E5E5E5;
+  padding: 16px 18px;
+  border-radius: 6px;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 20px 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.code-block .comment { color: #888; }
+.code-block .key { color: #7BA7E1; }
+
+.inline-code {
+  background: #F1F1F1;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 0.85em;
+  color: #C53030;
+}
+
+/* ───── Step block (minimal) ───── */
+.step {
+  margin: 20px 0;
+}
+.step-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.step-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+.step p { margin: 0; }
+
+/* ───── Impact rows (minimal) ───── */
+.impact-list {
+  margin: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.impact-row-min {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  align-items: baseline;
+}
+.impact-row-min .area {
+  color: var(--muted);
+  font-size: 13px;
+}
+.impact-row-min .after {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.impact-row-min .after strong { color: var(--ink); font-weight: 700; }
+@media (max-width: 600px) {
+  .impact-row-min { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* ───── Divider (충전 모티프) ───── */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 56px 0;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 0 0 80px;
+  height: 1px;
+  background: var(--line);
+  margin: 0 16px;
+}
+.divider-icon {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+/* ───── Inline icons (meta · label) ───── */
+.inline-icon-sm {
+  height: 14px;
+  width: auto;
+  vertical-align: -3px;
+  display: inline-block;
+  margin-right: 4px;
+}
+.inline-icon-md {
+  height: 18px;
+  width: auto;
+  vertical-align: -4px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* ───── Stats card (Recognition Culture) ───── */
+.stats-card {
+  margin: 36px 0 48px;
+  padding: 32px 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.stats-card-title,
+.stats-card h2.stats-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin: 0 0 6px;
+  text-align: center;
+  line-height: 1.4;
+}
+.stats-card-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 32px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 16px;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted-2);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.stat-num {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+  min-height: 56px;
+}
+.stat-unit {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-left: 2px;
+}
+.stat-cat {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin: 8px 0 4px;
+}
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.55;
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+  .stat-num { min-height: auto; font-size: 18px; }
+  .stats-card { padding: 24px 16px 20px; }
+}
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
+
+/* ───── Next episode teaser ───── */
+.next-episode {
+  margin: 56px 0 32px;
+  padding: 32px 28px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  text-align: center;
+  background: linear-gradient(180deg, transparent 0%, #FAFCFF 100%);
+}
+.next-episode .next-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.next-episode .next-title {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.next-episode .next-hint {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 48px 0;
+}
+
+/* ───── Footer ───── */
+.byline {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.byline .avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: #E8F4FD;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.byline .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.byline .info strong { display: block; color: var(--ink); margin-bottom: 2px; font-weight: 600; font-size: 13px; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 32px;
+  padding: 0;
+  list-style: none;
+}
+.tags li { display: contents; }
+.tag {
+  display: inline-block;
+  padding: 6px 12px;
+  min-height: 32px;
+  font-size: 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-weight: 400;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.article-footer {
+  margin-top: 0;
+}
+
+.visually-hidden-icon {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+  border: 0;
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다",
+  "description": "워터(Water) BXD팀이 직접 취재한 첫 번째 AI Best Practice Session 현장 기록.",
+  "image": "hero_세션전경.jpeg",
+  "datePublished": "2026-05-01",
+  "author": {
+    "@type": "Organization",
+    "name": "Water BXD팀"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "워터(Water)"
+  },
+  "inLanguage": "ko-KR",
+  "articleSection": "AI Best Practice Series",
+  "keywords": ["AI", "워터", "전기차충전", "사내문화", "Claude", "NoCode"]
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<main id="main-content" class="article">
+<article>
+
+  <!-- ───── HEADER ───── -->
+  <header>
+    <span class="eyebrow">Water · BXD Note · Episode 01</span>
+    <h1>충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다</h1>
+    <p class="subtitle">
+      전기차 충전 인프라 스타트업 워터(Water)의 구성원들이 AI와 협업하는 방법 — 첫 번째 AI Best Practice Session 현장 기록
+    </p>
+    <div class="meta">
+      <span class="author">Water BXD팀</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <span>AI Best Practice Series</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <time datetime="2026-05">2026.05</time>
+      <span class="dot" aria-hidden="true">·</span>
+      <span><img src="./ilo_face_outline@2x.png" alt="" width="28" height="28" class="inline-icon-sm" aria-hidden="true" decoding="async">15분 충전</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <figure class="hero">
+    <img src="./hero_세션전경.jpeg" alt="워터 AI Best Practice Session 첫 회차 — 'AI로 일하는 조직이 되자' 슬라이드와 함께 한자리에 모인 워터 크루들" width="1200" height="675" fetchpriority="high" decoding="async">
+  </figure>
+
+  <!-- ───── INTRO ───── -->
+  <p>안녕하세요, 워터(Water) <strong>BXD팀</strong>입니다.</p>
+
+  <p>BXD(Brand Experience Design)팀은 워터가 일하는 방식, 우리만의 문화, 그리고 그 안에서 만들어지는 작은 이야기들을 사내외에 전하는 일을 맡고 있어요. 오늘 BXD팀이 직접 취재해 들고 온 이야기는 <span class="text-highlight">워터의 첫 번째 AI Best Practice Session</span>입니다.</p>
+
+  <p>워터는 누구나 빠르고 편리하게 전기차를 충전할 수 있는 인프라를 만들고 있습니다. 그런데 요즘 저희가 충전하는 것은 비단 전기차만이 아닙니다. 워터 크루들의 번뜩이는 아이디어, 일하는 방식, 그리고 동료들의 가능성까지 함께 충전하고 있습니다.</p>
+
+  <p>그날 우리가 모인 자리는 단순히 "요즘 이런 AI 툴이 핫하대요"라고 소개하는 시간이 아니었습니다. <span class="text-highlight">"AI와 함께 일하면 우리의 역할은 어떻게 달라질까?"</span>라는 본질적인 질문을 던지고, 각 팀이 현업에서 치열하게 실험해 온 생생한 기록을 나누는 공유의 장이었습니다.</p>
+
+  <div class="figure-grid">
+    <figure>
+      <img src="./intro_촬영현장.jpeg" alt="세션을 핸드폰으로 촬영하고 있는 모습" loading="lazy" decoding="async">
+    </figure>
+    <figure>
+      <img src="./intro_분위기.jpeg" alt="유리벽 너머로 보이는 세션장의 활기찬 분위기" loading="lazy" decoding="async">
+    </figure>
+  </div>
+
+  <p>당근의 해커톤이나 오늘의집의 기술 공유 문화처럼, 워터 크루들 역시 성장에 대한 열정으로 가득합니다. 워터가 AI를 어떻게 업무에 녹여내고 있는지, 열기 가득했던 현장 인사이트를 공개합니다.</p>
+
+  <!-- ───── RECOGNITION CULTURE CARD ───── -->
+  <section class="stats-card" aria-labelledby="stats-card-title">
+    <h2 id="stats-card-title" class="stats-card-title">Recognition Culture</h2>
+    <p class="stats-card-subtitle">공유한 사람에게 박수가 돌아가는 구조</p>
+    <div class="stats-grid" role="list">
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">01</span>
+        <span class="stat-num">000만원<span class="stat-unit"><br>
+            총상금</span></span>
+        <span class="stat-cat">월간 Best Practice Team</span>
+        <span class="stat-label">동료 투표 + 대표 평가</span>
+      </div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">02</span>
+        <span class="stat-num">발표자 전원<br>리워드</span>
+        <span class="stat-cat">Individual Speaker</span>
+        <span class="stat-label">자발적 실험과 공유 자체를 인정</span>
+      </div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">03</span>
+        <span class="stat-num"> Team +<br>Individual</span>
+        <span class="stat-cat">2개의 성장 트랙</span>
+        <span class="stat-label">조직의 변화와 개인의 탐구가 함께</span>
+      </div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">04</span>
+        <span class="stat-num">Year-end<br>Awards</span>
+        <span class="stat-cat">연말 시상</span>
+        <span class="stat-label">대표's Choice + Everyone's Choice</span>
+      </div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">05</span>
+        <span class="stat-num">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40 → <br>
+            400</span>
+        <span class="stat-cat">AI Agent 조직 확장</span>
+        <span class="stat-label">사람 수가 아니라 능력의 규모를 확장</span>
+      </div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">06</span>
+        <span class="stat-num">AI로 일하는<br>조직</span>
+        <span class="stat-cat">툴 사용을 넘어선 문화 변화</span>
+        <span class="stat-label">AI를 쓰는 사람이 아닌 AI로 일하는 조직</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="presentation" aria-hidden="true"><img src="./ilo_face_outline@2x.png" alt="" width="60" height="60" class="divider-icon" decoding="async"></div>
+
+  <!-- ───── SECTION 1. 세션 구조 ───── -->
+  <h2><span class="section-num">01</span>세션은 어떻게 설계됐을까</h2>
+
+  <p>이번 세션은 단순한 발표 모음이 아니라, <span class="text-highlight">사고방식 → 실험 → 확장</span>의 흐름으로 설계되었습니다. 첫 시간에는 'AI를 어떻게 바라봐야 하는가'를 다루고, 이어서 실제 시스템을 만든 사례, 그리고 마지막으로 한 사람의 작은 실험까지. 이론에서 실전으로 자연스럽게 이어지는 구조였습니다.</p>
+
+  <div class="track-table" role="region" aria-label="세션 트랙 구성">
+    <div class="track-row head" aria-hidden="true">
+      <span>트랙</span><span>발표자</span><span>주제</span>
+    </div>
+    <div class="track-row">
+      <span class="track-letter">A</span>
+      <span class="track-presenter">서비스기획팀</span>
+      <span class="track-topic">프롬프트 설계 원칙 — 명령이 아니라 대화로</span>
+    </div>
+    <div class="track-row">
+      <span class="track-letter">B</span>
+      <span class="track-presenter">운영관리팀</span>
+      <span class="track-topic">AI Agent 시대, 비개발자가 시스템을 만들다</span>
+    </div>
+    <div class="track-row">
+      <span class="track-letter">C</span>
+      <span class="track-presenter">개인 발표</span>
+      <span class="track-topic">3일 만에 만든 충전소 맛집 추천 웹앱</span>
+    </div>
+    <div class="track-row">
+      <span class="track-letter">D</span>
+      <span class="track-presenter">Live Demo</span>
+      <span class="track-topic">실시간 AI 활용 시연</span>
+    </div>
+  </div>
+
+  <!-- ───── SECTION A — 서비스기획팀 ───── -->
+  <h2><span class="section-num">A 트랙 · 서비스기획팀</span>프롬프트는 '명령'이 아니라 '대화'다</h2>
+
+  <p>"AI가 자꾸 엉뚱한 대답을 해요." 서비스기획팀의 발표는 이 문제 인식에서 시작했습니다.</p>
+
+  <figure>
+    <img src="./01_세션A_프롬프팅화면.jpeg" alt="세션 A 발표 시작 — '프롬프팅, 어떻게 잘할까?' 문제 제기" loading="lazy" decoding="async">
+    <figcaption>발표는 "왜 같은 AI를 쓰는데 결과가 다를까?"라는 질문에서 출발했습니다.</figcaption>
+  </figure>
+
+  <div class="step">
+    <span class="step-label">발의</span>
+    <span class="step-title">"AI에게 일을 시키는데 왜 매번 결과가 다르지?"</span>
+    <p>기존에는 "이런 기획서 만들어줘"라고 명령식으로 프롬프트를 작성하는 경우가 많았습니다. 하지만 일방적인 지시로는 기획자가 진짜 원하는 디테일한 결과물을 얻기 어려웠습니다. 같은 AI를 써도 사람마다 결과 품질이 천차만별이었죠.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">전환</span>
+    <span class="step-title">지시자에서 대화 파트너로</span>
+    <p>서비스기획팀은 접근 방식을 바꿨습니다. "나는 이런 목적을 가진 서비스를 기획 중인데, 너라면 어떤 기능이 필요할 것 같아?"라고 먼저 질문을 던지기 시작했습니다. <span class="text-highlight">AI를 단순한 작업 도구가 아닌 '생각을 나누는 파트너'로 대우한 것이죠.</span></p>
+  </div>
+
+  <figure>
+    <img src="./01_세션A_대화형화면.jpeg" alt="LLM은 '대화형' 시스템이라는 핵심 개념 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"LLM은 생김새도, 동작도 매일 쓰는 채팅 앱과 똑같습니다. 한마디로 — 대화형."</figcaption>
+  </figure>
+
+  <h3>핵심 프레임 — MAKE 모드와 THINK 모드</h3>
+
+  <p>발표에서 제시된 가장 강력한 도구는 <strong>프롬프트의 두 가지 모드</strong>를 구분하는 것이었습니다. 결과를 만드는 모드와 사고를 확장하는 모드는 입력 방식이 달라야 한다는 인사이트입니다.</p>
+
+  <ul class="simple-list">
+    <li><strong>MAKE 모드 — 결과 생성:</strong> 정의된 결과물을 빠르게 뽑아낼 때. 역할·목적·형식을 명확히 지정. "기획자 역할로, 300자 이내로, 마크다운 표 형식으로."</li>
+    <li><strong>THINK 모드 — 사고 확장:</strong> 아이디어를 발산하고 검토할 때. 열린 질문으로 AI가 가설을 제시하게 함. "이 방향의 약점은 뭐야?", "내가 놓친 관점이 있을까?"</li>
+  </ul>
+
+  <h3>결과 품질을 끌어올린 세 가지 원칙</h3>
+
+  <p>같은 모델을 써도 결과가 폭발적으로 좋아진 비결은 다음 세 가지 원칙을 일관되게 적용하는 것이었습니다.</p>
+
+  <ol class="simple-list">
+    <li><strong>역할 지정</strong> — "너는 인프라 펀드 IR 담당자야"처럼 AI가 어떤 페르소나로 응답할지 먼저 정의.</li>
+    <li><strong>목적 명확화</strong> — 결과물의 용도를 알려준다. "투자자 미팅용 1페이지 요약", "내부 의사결정용 비교 분석" 등.</li>
+    <li><strong>형식 정의</strong> — 출력 형식을 구체적으로. "표로", "300자 이내로", "Bullet 5개로". 형식 제약이 품질을 만듭니다.</li>
+  </ol>
+
+  <h3>워터 표준 작업 프로세스</h3>
+
+  <p>발표에서 공유된 워터의 AI 협업 표준 프로세스는 다음과 같습니다.</p>
+
+  <div class="code-block"><span class="key">Step 1.</span> 초안 생성    <span class="comment">→ AI에게 역할·목적·형식 지정 후 1차 산출</span>
+<span class="key">Step 2.</span> 사람 검토    <span class="comment">→ 사실 확인, 누락된 관점 보완</span>
+<span class="key">Step 3.</span> HTML/포맷 변환 <span class="comment">→ 최종 출력 형식으로 정리</span>
+<span class="key">Step 4.</span> 최종 산출    <span class="comment">→ 협업 도구에 공유</span></div>
+
+  <figure>
+    <img src="./01_세션A_청중컷.jpeg" alt="발표에 집중하는 청중들 — 메모를 하거나 화면을 응시하는 모습" loading="lazy" decoding="async">
+    <figcaption>"내가 평소에 던지던 프롬프트는 어땠지?" — 자기 사용 패턴을 점검하기 시작한 순간.</figcaption>
+  </figure>
+
+  <blockquote class="pullquote">
+    <p>"같은 AI를 써도 결과가 다른 이유는 결국 '대화 방식'에 있습니다. AI는 명령을 기다리는 도구가 아니라, 함께 생각을 짜는 파트너입니다."</p>
+    <footer><cite>서비스기획팀 발표 중</cite></footer>
+  </blockquote>
+
+  <!-- ───── SECTION B — 운영관리팀 ───── -->
+  <h2><span class="section-num">B 트랙 · 운영관리팀</span>비개발자도 직접 시스템을 만든다</h2>
+
+  <p>코딩 한 줄 없이 충전기 AS 관리 시스템을 만들어 본 실전 사례입니다.</p>
+
+  <figure>
+    <img src="./02_세션B_AIAgent화면.jpeg" alt="'AI Agent 시대의 비개발자 역할 재정의' 발표 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"개발자가 아닌 사람이 시스템을 만든다." 운영관리팀의 도전이 시작됐습니다.</figcaption>
+  </figure>
+
+  <div class="step">
+    <span class="step-label">발의</span>
+    <span class="step-title">반복되는 수기 업무를 끊어내자</span>
+    <p>기존에는 충전기 고장 접수가 들어오면 카톡으로 현장 사진을 받고, 엑셀에 수기로 내용을 입력한 뒤, 협력사에 전화로 상황을 전달해야 했습니다. 파이썬이나 자바를 모르는 운영관리팀이지만, 이 비효율을 직접 해결하기로 했습니다.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">과정</span>
+    <span class="step-title">AI 파트너 + 노코드 툴의 결합</span>
+    <p>먼저 <strong>Claude</strong>에게 "우리의 AS 업무 프로세스는 이런데, 자동화하려면 어떤 DB 스키마가 필요할까?"라고 물으며 뼈대를 잡았습니다. 그 후 <strong>Lovable</strong>이라는 노코드 UI 빌더에 프롬프트를 입력해 화면을 찍어내고, 백엔드 DB인 <strong>Supabase</strong>를 연동했습니다.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">결과</span>
+    <span class="step-title">완벽하게 작동하는 충전기 AS 관리 시스템</span>
+    <p><span class="text-highlight">운영관리팀은 개발자의 도움 없이 운영 가능한 AS 관리 시스템을 완성했습니다.</span> 접수, 사진 수집, 협력사 전달, 정산까지 한 흐름으로 묶여서 돌아갑니다.</p>
+  </div>
+
+  <figure>
+    <img src="./02_세션B_발표자.jpeg" alt="운영관리팀 발표자가 사례를 공유하고 있는 모습" loading="lazy" decoding="async">
+    <figcaption>현장의 비효율을 직접 끊어낸 운영관리팀의 발표는 큰 공감을 얻었습니다.</figcaption>
+  </figure>
+
+  <h3>워터의 비개발자 시스템 구축 스택</h3>
+
+  <p>이 시스템은 도구 하나로 만들어진 것이 아니라, 각각의 역할이 명확하게 분리된 4단 스택의 조합이었습니다.</p>
+
+  <div class="tech-list">
+    <div class="tech-row">
+      <div class="role">사람</div>
+      <div class="tool">문제 정의, 업무 흐름 설계, 결과 검증, 보안 의사결정. <strong>가장 중요한 역할.</strong></div>
+    </div>
+    <div class="tech-row">
+      <div class="role">AI 파트너</div>
+      <div class="tool"><strong>Claude</strong> — DB 스키마 설계, UI 빌더용 프롬프트 작성, 에러 진단, 코드 리뷰.</div>
+    </div>
+    <div class="tech-row">
+      <div class="role">UI 빌더</div>
+      <div class="tool"><strong>Lovable</strong> — 프롬프트로 React + Tailwind 화면을 자동 생성. 노코드 친화적.</div>
+    </div>
+    <div class="tech-row">
+      <div class="role">백엔드 / DB</div>
+      <div class="tool"><strong>Supabase</strong> — DB 호스팅, 인증·권한 관리, 스케줄링 자동화. 무료 티어로 시작 가능.</div>
+    </div>
+  </div>
+
+  <h3>DB 스키마 설계도 AI와 함께</h3>
+
+  <p>운영관리팀이 Claude에게 던진 첫 질문 중 하나는 데이터 구조에 대한 것이었습니다. 비개발자가 처음부터 짜기 어려운 영역인데, AI가 초안을 잡아주고 사람이 수정·검증하는 흐름이 효과적이었습니다.</p>
+
+  <div class="code-block"><span class="comment"># Claude에게 던진 초기 프롬프트 (요약)</span>
+"우리 AS 업무는 '접수 → 현장 출동 → 수리 → 정산' 단계로 진행돼.
+각 단계마다 책임자, 사진, 메모, 비용이 다르게 발생해.
+이걸 관리할 수 있는 DB 스키마를 제안해줘. 정규화도 고려해서."
+
+<span class="comment"># Claude의 응답 구조 (요약)</span>
+<span class="key">tickets</span>      - id, status, created_at, location_id
+<span class="key">ticket_steps</span> - ticket_id, step, assignee, completed_at
+<span class="key">photos</span>       - ticket_id, step, file_url, uploaded_at
+<span class="key">vendors</span>      - id, name, unit_price, sla_days
+<span class="key">settlements</span> - ticket_id, vendor_id, amount, paid_at</div>
+
+  <aside class="callout tip" role="note" aria-label="핵심 학습">
+    <strong>💡 핵심 학습</strong>
+    <p>여기서 끝이 아니라, 운영관리팀은 이 스키마에 실제 워터의 운영 현실에 맞춰 컬럼을 추가·수정했습니다. <span class="text-highlight">AI가 제안한 구조는 100점이 아니라 80점짜리 초안</span>이라는 게 이번 사례의 핵심 학습이었습니다.</p>
+  </aside>
+
+  <figure>
+    <img src="./02_세션B_청중컷.jpeg" alt="발표를 깊이 듣고 있는 청중" loading="lazy" decoding="async">
+    <figcaption>"우리 팀도 이런 거 만들 수 있겠다." 발표 내내 비슷한 반응이 이어졌습니다.</figcaption>
+  </figure>
+
+  <blockquote class="pullquote">
+    <p>"이제는 '개발 언어를 다룰 줄 아느냐'보다 '우리의 진짜 문제가 무엇이고, 어떤 논리 흐름으로 해결할 것인지'를 정의하는 능력이 훨씬 중요합니다."</p>
+    <footer><cite>운영관리팀 발표 중</cite></footer>
+  </blockquote>
+
+  <!-- ───── SECTION C — 개인 발표 ───── -->
+  <h2><span class="section-num">C 트랙 · 개인 발표</span>아이디어는 작게, 결과는 진짜 서비스로</h2>
+
+  <p>3일 만에 완성한 충전소 맛집 추천 웹앱 실험기입니다.</p>
+
+  <figure>
+    <img src="./03_세션C_대화시작.jpeg" alt="개인 발표 — '이런 대화부터 시작했어요' 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"맛집 가이드를 만들어 본다면 어떨까?" 작은 대화에서 시작된 3일간의 실험.</figcaption>
+  </figure>
+
+  <div class="step">
+    <span class="step-label">발의</span>
+    <span class="step-title">충전하는 30~40분, 고객은 무엇을 할까?</span>
+    <p>"우리 충전소 근처 맛집을 추천해 주면 어떨까?"라는 작고 가벼운 아이디어에서 출발했습니다. 예전 같으면 기획서를 쓰고, 디자이너·개발자 리소스를 조율하며 최소 한두 달은 걸렸을 만한 프로젝트였습니다.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">레퍼런스</span>
+    <span class="step-title">미쉐린 가이드의 영감</span>
+    <p>미쉐린이 타이어를 더 많이 팔기 위해 미식 가이드북을 만들었던 사례에서 영감을 받았습니다. 충전 인프라 회사가 충전 경험 주변의 라이프스타일을 함께 상상해 볼 수 있다는 출발점입니다.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">실행</span>
+    <span class="step-title">기능 단위로 빠르게 확장</span>
+    <p>지도 → 챗봇 → 리뷰 → 관리자. AI와 대화하며 한 기능씩 쌓아 올렸습니다. 머릿속 아이디어가 눈앞의 화면으로 즉시 구현되는 경험이었습니다.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">결과</span>
+    <span class="step-title">3일 만에 작동하는 웹앱 + 사내 테스트 완료</span>
+    <p>맛집 지도, AI 추천, 회원 시스템까지 갖춘 <span class="text-highlight">실제 작동하는 프로토타입을 단 3일 만에 완성</span>했습니다.</p>
+  </div>
+
+  <figure>
+    <img src="./03_세션C_문제해결.jpeg" alt="'고질적인 문제 셋, 저는 이렇게 풀어요' — 환각, 대화 실패, 반복 작업 해결 방식 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"환각 / 대화 실패 / 반복 작업" — 부딪힌 문제마다 자기만의 해결 패턴을 정리했습니다.</figcaption>
+  </figure>
+
+  <h3>막힘을 자산으로 바꾸는 방식</h3>
+
+  <p>실험 과정에서 부딪힌 문제들도 그냥 넘기지 않았습니다. 매번 발생한 문제를 어떻게 해결했는지 패턴화해서 다음 실험의 자산으로 만들었습니다.</p>
+
+  <div class="impact-list">
+    <div class="impact-row-min">
+      <div class="area">AI 환각 (hallucination)</div>
+      <div class="after"><strong>교차 검증</strong> — 다른 모델 또는 다른 프롬프트로 재확인</div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">기능 구현 실패</div>
+      <div class="after"><strong>실패 기록</strong> — 어떤 프롬프트가 왜 실패했는지 문서화</div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">같은 실수 반복</div>
+      <div class="after"><strong>지침화</strong> — 프로젝트 루트에 가이드 파일로 정리</div>
+    </div>
+  </div>
+
+  <figure>
+    <img src="./03_세션C_청중컷.jpeg" alt="개인 발표를 듣고 있는 청중의 진지한 표정" loading="lazy" decoding="async">
+    <figcaption>"내일 당장 시도해 볼 거리가 생겼다." 발표가 끝나자 메모하는 소리가 들렸습니다.</figcaption>
+  </figure>
+
+  <blockquote class="pullquote">
+    <p>"개발을 잘하는 사람이 아니라, AI와 대화를 잘하는 사람이 만듭니다. 거창한 혁신보다 '한 번 만들어볼까?'라는 작은 시도가 AI를 만났을 때 가장 빠르게 힘을 발휘합니다."</p>
+    <footer><cite>개인 발표 중</cite></footer>
+  </blockquote>
+
+  <!-- ───── SECTION D — Live Demo ───── -->
+  <h2><span class="section-num">D 트랙 · Live Demo</span>지금, 여기서, 충전합니다</h2>
+
+  <p>이론과 사례 공유만으로 끝나지 않았습니다. 세션의 마지막은 <strong>실시간 라이브 데모</strong>였습니다. 발표자가 무대 위에서 AI와 대화하며 작은 도구 하나를 처음부터 끝까지 만들어 보여주는 시간이었습니다.</p>
+
+  <figure>
+    <img src="./04_LiveDemo.jpeg" alt="라이브 데모 — 코드 에디터 화면과 청중의 노트북·핸드폰이 함께 잡힌 장면" loading="lazy" decoding="async">
+    <figcaption>"실패하면 다 함께 봅니다." 라이브로 진행된 AI 협업 데모.</figcaption>
+  </figure>
+
+  <p>가장 인상 깊었던 것은 '완벽하게 가공된 사례'가 아니라 <span class="text-highlight">실시간으로 부딪히는 문제 그 자체를 함께 공유했다는 점</span>입니다. AI가 잘못된 답을 내놓을 때 어떻게 다시 질문하는지, 코드가 동작하지 않을 때 무엇을 점검하는지 — 결과보다 과정을 그대로 보여주는 데모였습니다.</p>
+
+  <div class="divider" role="presentation" aria-hidden="true"><img src="./ilo_face_outline@2x.png" alt="" width="60" height="60" class="divider-icon" decoding="async"></div>
+
+  <!-- ───── 가드레일 ───── -->
+  <h2><span class="section-num">02</span>AI 협업의 명암 — 워터가 세운 4가지 가드레일</h2>
+
+  <p>물론 모든 과정이 마법처럼 순탄하지만은 않았습니다. 좌충우돌 실험 과정에서 얻은 뼈아픈 레슨도 세션에서 투명하게 공유되었습니다. AI와 안전하게 협업하기 위해 워터가 스스로 세운 4가지 철칙입니다.</p>
+
+  <aside class="callout note" role="note" aria-label="4가지 가드레일">
+    <strong>📌 4가지 가드레일</strong>
+    <p style="margin-top: 8px;">
+      <strong>1. DB 구조 불일치 주의</strong> — AI도 전체 인프라 구조를 오해할 수 있습니다. 빈 DB를 참조하거나 잘못된 관계를 가정하는 경우가 있으니, AI가 제안한 구조는 반드시 사람이 최종 검증합니다.<br><br>
+      <strong>2. 보안은 처음부터</strong> — 채팅창에 API 키를 평문으로 노출하는 실수는 금물. 민감 정보 관리 규칙은 시스템 구축 전 사전에 설정합니다.<br><br>
+      <strong>3. 파괴적 SQL 제안은 거부</strong> — 가끔 AI가 <code class="inline-code">TRUNCATE</code>나 <code class="inline-code">DROP CASCADE</code> 같은 위험한 제안을 합니다. "진단만 해, 수정은 내가 컨펌한 후에"라는 패턴을 유지해야 대참사를 막을 수 있습니다.<br><br>
+      <strong>4. 테스트, 또 테스트</strong> — AI가 "구현 완료"라고 외쳐도 실제 데이터를 넣어보면 오류가 나는 경우가 많습니다. 프롬프트만큼 검증 시나리오도 꼼꼼하게 준비합니다.
+    </p>
+  </aside>
+
+  <!-- ───── IMPACT ───── -->
+  <h2><span class="section-num">03</span>그래서 무엇이 달라졌을까</h2>
+
+  <p>이러한 치열한 실험과 고민의 결과, 워터의 업무 풍경은 극적으로 변했습니다. 'AI 적용 전후' 5가지 변화입니다.</p>
+
+  <div class="impact-list">
+    <div class="impact-row-min">
+      <div class="area">담당자 접수</div>
+      <div class="after">접수 즉시 카카오 알림톡 <strong>자동 발송</strong></div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">현장 사진 관리</div>
+      <div class="after">티켓당 자동 압축 및 <strong>클라우드 영구 저장</strong></div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">협력사 정산</div>
+      <div class="after">점검 구분 선택 시 <strong>자동 산출 및 통계화</strong></div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">SLA 측정</div>
+      <div class="after">영업일 기준 <strong>자동 계산 로직</strong> 적용</div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">데이터 통합</div>
+      <div class="after">역할별 접근 통제 + <strong>원클릭 엑셀 다운로드</strong></div>
+    </div>
+  </div>
+
+  <div class="figure-grid">
+    <figure>
+      <img src="./outro_청중몰입.jpeg" alt="세션 후반부에 발표를 집중해서 듣고 있는 워터 크루들" loading="lazy" decoding="async">
+    </figure>
+    <figure>
+      <img src="./outro_분위기.jpeg" alt="조명이 어두워진 세션장 — 발표가 점점 깊어지는 순간" loading="lazy" decoding="async">
+    </figure>
+  </div>
+
+  <p style="text-align: center; font-size: 13px; color: var(--muted); margin-top: -4px;">발표가 깊어질수록 고요한 집중력을 보여주는 크루들!</p>
+
+  <div class="divider" role="presentation" aria-hidden="true"><img src="./ilo_face_outline@2x.png" alt="" width="60" height="60" class="divider-icon" decoding="async"></div>
+
+  <!-- ───── OUTRO ───── -->
+  <h2><span class="section-num">04</span>전기차 회사가 왜 이렇게 AI에 진심일까</h2>
+
+  <p>글을 읽으시면서 이런 의문이 드실 수도 있습니다. <em>'전기차 충전기 만드는 회사에서 왜 이렇게 깊이 AI를 고민하지?'</em></p>
+
+  <p>워터가 만드는 것은 단순한 충전기 하드웨어가 아닙니다. 고객에게 <strong>더 빠르고 편리한 최상의 충전 경험</strong>을 제공하기 위해서는, 이를 뒷받침하는 우리 내부의 일하는 방식 역시 최전선에서 진화해야 하기 때문입니다.</p>
+
+  <p>데이터, 운영, 현장 대응, 고객 경험이 그 어느 곳보다 촘촘하게 연결된 이 산업에서 <span class="text-highlight">AI는 일시적인 유행이 아니라 새로운 업무 인프라 그 자체</span>입니다.</p>
+
+  <p>이번 세션을 관통하는 단 하나의 문장으로 글을 맺습니다.</p>
+
+  <blockquote class="pullquote">
+    <p>"AI는 우리의 일을 줄여주는 도구가 아니라, 우리가 더 좋은 일을 하게 만드는 방식이다."</p>
+  </blockquote>
+
+  <p>오늘 공유한 기록은 워터가 어떻게 배우고, 실험하며, 성장하는지를 보여주는 작은 단면입니다. 우리의 다음 '충전'은 차량이 아닐지도 모릅니다. 또 다른 혁신적인 아이디어일 수도 있습니다. 스스로 한계를 부수고 나아가는 워터 크루들의 다음 스텝도 많이 기대해 주세요.</p>
+
+  <aside class="next-episode" aria-label="다음 에피소드 안내">
+    <span class="next-label"><img src="./ilo_face_outline@2x.png" alt="" width="36" height="36" class="inline-icon-md" aria-hidden="true" decoding="async">다음 충전은 곧 시작됩니다</span>
+    <strong class="next-title">Episode 02 · Coming Soon</strong>
+    <p class="next-hint">두 번째 AI Best Practice Session에서는 어떤 충전이 일어날까요?<br>BXD팀이 곧 다음 현장에서 다시 찾아옵니다!</p>
+  </aside>
+
+</article>
+
+<footer class="article-footer">
+  <div class="byline">
+    <div class="avatar"><img src="./profile_bxd.png" alt="Water BXD팀 프로필" width="48" height="48" loading="lazy" decoding="async"></div>
+    <div class="info">
+      <strong>Water BXD팀 (Brand Experience Design)</strong>
+      <span>워터가 일하는 방식, 우리만의 문화, 그 안에서 만들어지는 이야기들을 사내외에 전합니다.</span>
+    </div>
+  </div>
+
+  <ul class="tags" aria-label="글 태그">
+    <li><span class="tag">AI</span></li>
+    <li><span class="tag">사내문화</span></li>
+    <li><span class="tag">일하는방식</span></li>
+    <li><span class="tag">워터</span></li>
+    <li><span class="tag">전기차충전</span></li>
+    <li><span class="tag">Claude</span></li>
+    <li><span class="tag">NoCode</span></li>
+  </ul>
+</footer>
+</main>
+</body>
+</html>
