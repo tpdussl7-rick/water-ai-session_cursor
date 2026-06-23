@@ -12,20 +12,20 @@
 <link rel="canonical" href="aibp.html">
 <link rel="icon" href="./ilo_face_outline@2x.png" type="image/png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preload" href="./hero_세션전경.jpeg" as="image" type="image/jpeg">
+<link rel="preload" href="./hero_session.jpeg" as="image" type="image/jpeg">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="워터(Water) BXD Note">
 <meta property="og:title" content="충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다">
 <meta property="og:description" content="워터 BXD팀이 직접 취재한 첫 번째 AI Best Practice Session 현장 기록.">
 <meta property="og:url" content="aibp.html">
-<meta property="og:image" content="hero_세션전경.jpeg">
+<meta property="og:image" content="hero_session.jpeg">
 <meta property="og:image:alt" content="워터 AI Best Practice Session 첫 회차 현장">
 <meta property="article:published_time" content="2026-05-01">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다">
 <meta name="twitter:description" content="워터 BXD팀이 직접 취재한 첫 번째 AI Best Practice Session 현장 기록.">
-<meta name="twitter:image" content="hero_세션전경.jpeg">
+<meta name="twitter:image" content="hero_session.jpeg">
 <meta name="twitter:image:alt" content="워터 AI Best Practice Session 첫 회차 현장">
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
@@ -166,8 +166,38 @@ h1 {
   border-radius: 6px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+
+}
+.hero .hero-poster {
+  margin-bottom: 0;
+  aspect-ratio: auto;     /* 16/9 강제 해제 */
+  object-fit: contain;
 }
 
+.hero-quote {
+  margin: 48px 6%;
+  padding: 0;
+  text-align: center;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.hero-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+@media (max-width: 768px) {
+  .hero-quote { margin: 32px 4%; font-size: 1.2rem; }
+}
 /* ───── Body ───── */
 h2 {
   font-size: 20px;
@@ -483,7 +513,47 @@ ul.simple-list li, ol.simple-list li {
   display: inline-block;
   margin-right: 5px;
 }
-
+/* ───── Interview box (발표 끝나고 한 줄) ───── */
+.interview-box {
+  margin: 32px 0 40px;
+  padding: 22px 26px 20px;
+  background: var(--note-bg);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+.interview-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.interview-q {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+.interview-a {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.7;
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+.interview-attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  margin: 0;
+  font-weight: 400;
+}
 /* ───── Stats card (Recognition Culture) ───── */
 .stats-card {
   margin: 36px 0 48px;
@@ -688,7 +758,7 @@ hr {
   "@type": "Article",
   "headline": "충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다",
   "description": "워터(Water) BXD팀이 직접 취재한 첫 번째 AI Best Practice Session 현장 기록.",
-  "image": "hero_세션전경.jpeg",
+  "image": "hero_session.jpeg",
   "datePublished": "2026-05-01",
   "author": {
     "@type": "Organization",
@@ -713,9 +783,10 @@ hr {
   <!-- ───── HEADER ───── -->
   <header>
     <span class="eyebrow">Water · BXD Note · Episode 01</span>
-    <h1>충전만 빠르게 하는 줄 알았더니, 일하는 방식도 빠르게 바꾸는 중입니다</h1>
+    <h1>첫 번째 AI Best Practice Session 현장 노트</h1>
     <p class="subtitle">
-      전기차 충전 인프라 스타트업 워터(Water)의 구성원들이 AI와 협업하는 방법 — 첫 번째 AI Best Practice Session 현장 기록
+      전기차 충전 인프라 스타트업 워터(Water)의 구성원들이 AI와 협업하는 방법<br>
+      <h3>더 빠른 충전을 위해, 더 빠르게 배우는 팀</h3>
     </p>
     <div class="meta">
       <span class="author">Water BXD팀</span>
@@ -730,7 +801,16 @@ hr {
 
   <!-- HERO -->
   <figure class="hero">
-    <img src="./hero_세션전경.jpeg" alt="워터 AI Best Practice Session 첫 회차 — 'AI로 일하는 조직이 되자' 슬라이드와 함께 한자리에 모인 워터 크루들" width="1200" height="675" fetchpriority="high" decoding="async">
+    <div class="hero">
+      <img src="./hero_poster_bxd.jpg" alt="..." class="hero-poster">
+
+      <blockquote class="hero-quote">
+        “AI와 함께 일하면,<br>우리의 역할은 어떻게 달라질까?”
+        <cite>— 워터의 첫 AI Best Practice Session</cite>
+      </blockquote>
+
+      <img src="./hero_session.jpeg" alt="...">
+    </div>
   </figure>
 
   <!-- ───── INTRO ───── -->
@@ -744,10 +824,10 @@ hr {
 
   <div class="figure-grid">
     <figure>
-      <img src="./intro_촬영현장.jpeg" alt="세션을 핸드폰으로 촬영하고 있는 모습" loading="lazy" decoding="async">
+      <img src="./intro_filming.jpeg" alt="세션을 핸드폰으로 촬영하고 있는 모습" loading="lazy" decoding="async">
     </figure>
     <figure>
-      <img src="./intro_분위기.jpeg" alt="유리벽 너머로 보이는 세션장의 활기찬 분위기" loading="lazy" decoding="async">
+      <img src="./intro_atmosphere.jpeg" alt="유리벽 너머로 보이는 세션장의 활기찬 분위기" loading="lazy" decoding="async">
     </figure>
   </div>
 
@@ -838,7 +918,7 @@ hr {
   <p>"AI가 자꾸 엉뚱한 대답을 해요." 서비스기획팀의 발표는 이 문제 인식에서 시작했습니다.</p>
 
   <figure>
-    <img src="./01_세션A_프롬프팅화면.jpeg" alt="세션 A 발표 시작 — '프롬프팅, 어떻게 잘할까?' 문제 제기" loading="lazy" decoding="async">
+    <img src="./01_sessionA_prompting.jpeg" alt="세션 A 발표 시작 — '프롬프팅, 어떻게 잘할까?' 문제 제기" loading="lazy" decoding="async">
     <figcaption>발표는 "왜 같은 AI를 쓰는데 결과가 다를까?"라는 질문에서 출발했습니다.</figcaption>
   </figure>
 
@@ -855,7 +935,7 @@ hr {
   </div>
 
   <figure>
-    <img src="./01_세션A_대화형화면.jpeg" alt="LLM은 '대화형' 시스템이라는 핵심 개념 슬라이드" loading="lazy" decoding="async">
+    <img src="./01_sessionA_dialogue.jpeg" alt="LLM은 '대화형' 시스템이라는 핵심 개념 슬라이드" loading="lazy" decoding="async">
     <figcaption>"LLM은 생김새도, 동작도 매일 쓰는 채팅 앱과 똑같습니다. 한마디로 — 대화형."</figcaption>
   </figure>
 
@@ -888,7 +968,7 @@ hr {
 <span class="key">Step 4.</span> 최종 산출    <span class="comment">→ 협업 도구에 공유</span></div>
 
   <figure>
-    <img src="./01_세션A_청중컷.jpeg" alt="발표에 집중하는 청중들 — 메모를 하거나 화면을 응시하는 모습" loading="lazy" decoding="async">
+    <img src="./01_sessionA_audience.jpeg" alt="발표에 집중하는 청중들 — 메모를 하거나 화면을 응시하는 모습" loading="lazy" decoding="async">
     <figcaption>"내가 평소에 던지던 프롬프트는 어땠지?" — 자기 사용 패턴을 점검하기 시작한 순간.</figcaption>
   </figure>
 
@@ -896,6 +976,12 @@ hr {
     <p>"같은 AI를 써도 결과가 다른 이유는 결국 '대화 방식'에 있습니다. AI는 명령을 기다리는 도구가 아니라, 함께 생각을 짜는 파트너입니다."</p>
     <footer><cite>서비스기획팀 발표 중</cite></footer>
   </blockquote>
+  <div class="interview-box">
+    <p class="interview-label"><img src="./ilo_face_outline@2x.png" alt="" class="inline-icon-sm">Session Notes</p>
+    <p class="interview-q">Q. 발표 준비하면서 가장 크게 깨달은 점은요?</p>
+    <p class="interview-a">"프롬프트는 결국 '잘 쓴 글'이더라구요. 명확하게 못 쓰면 명확한 결과물도 안 나와요. 글쓰기 능력이 새로운 코딩 능력이 되는 것 같아요."</p>
+    <span class="interview-attribution">— 서비스기획팀</span>
+  </div>
 
   <!-- ───── SECTION B — 운영관리팀 ───── -->
   <h2><span class="section-num">B 트랙 · 운영관리팀</span>비개발자도 직접 시스템을 만든다</h2>
@@ -903,7 +989,7 @@ hr {
   <p>코딩 한 줄 없이 충전기 AS 관리 시스템을 만들어 본 실전 사례입니다.</p>
 
   <figure>
-    <img src="./02_세션B_AIAgent화면.jpeg" alt="'AI Agent 시대의 비개발자 역할 재정의' 발표 슬라이드" loading="lazy" decoding="async">
+    <img src="./02_sessionB_aiagent.jpeg" alt="'AI Agent 시대의 비개발자 역할 재정의' 발표 슬라이드" loading="lazy" decoding="async">
     <figcaption>"개발자가 아닌 사람이 시스템을 만든다." 운영관리팀의 도전이 시작됐습니다.</figcaption>
   </figure>
 
@@ -926,7 +1012,7 @@ hr {
   </div>
 
   <figure>
-    <img src="./02_세션B_발표자.jpeg" alt="운영관리팀 발표자가 사례를 공유하고 있는 모습" loading="lazy" decoding="async">
+    <img src="./02_sessionB_speaker.jpeg" alt="운영관리팀 발표자가 사례를 공유하고 있는 모습" loading="lazy" decoding="async">
     <figcaption>현장의 비효율을 직접 끊어낸 운영관리팀의 발표는 큰 공감을 얻었습니다.</figcaption>
   </figure>
 
@@ -970,12 +1056,12 @@ hr {
 <span class="key">settlements</span> - ticket_id, vendor_id, amount, paid_at</div>
 
   <aside class="callout tip" role="note" aria-label="핵심 학습">
-    <strong>💡 핵심 학습</strong>
+    <strong>| 핵심 학습 </strong>
     <p>여기서 끝이 아니라, 운영관리팀은 이 스키마에 실제 워터의 운영 현실에 맞춰 컬럼을 추가·수정했습니다. <span class="text-highlight">AI가 제안한 구조는 100점이 아니라 80점짜리 초안</span>이라는 게 이번 사례의 핵심 학습이었습니다.</p>
   </aside>
 
   <figure>
-    <img src="./02_세션B_청중컷.jpeg" alt="발표를 깊이 듣고 있는 청중" loading="lazy" decoding="async">
+    <img src="./02_sessionB_audience.jpeg" alt="발표를 깊이 듣고 있는 청중" loading="lazy" decoding="async">
     <figcaption>"우리 팀도 이런 거 만들 수 있겠다." 발표 내내 비슷한 반응이 이어졌습니다.</figcaption>
   </figure>
 
@@ -983,14 +1069,21 @@ hr {
     <p>"이제는 '개발 언어를 다룰 줄 아느냐'보다 '우리의 진짜 문제가 무엇이고, 어떤 논리 흐름으로 해결할 것인지'를 정의하는 능력이 훨씬 중요합니다."</p>
     <footer><cite>운영관리팀 발표 중</cite></footer>
   </blockquote>
+</div>
 
+<div class="interview-box">
+  <p class="interview-label"><img src="./ilo_face_outline@2x.png" alt="" class="inline-icon-sm">Session Notes</p>
+  <p class="interview-q">Q. 막혔을 때 가장 큰 도움이 된 건요?</p>
+  <p class="interview-a">"다른 각도로 다시 물어보는 거요. 한 번 막히면 5번은 다르게 질문해봐요. 6번째에 풀린 적도 있어요. 포기하지 않는 게 진짜 중요하더라구요."</p>
+  <span class="interview-attribution">— 운영관리팀</span>
+</div>
   <!-- ───── SECTION C — 개인 발표 ───── -->
   <h2><span class="section-num">C 트랙 · 개인 발표</span>아이디어는 작게, 결과는 진짜 서비스로</h2>
 
   <p>3일 만에 완성한 충전소 맛집 추천 웹앱 실험기입니다.</p>
 
   <figure>
-    <img src="./03_세션C_대화시작.jpeg" alt="개인 발표 — '이런 대화부터 시작했어요' 슬라이드" loading="lazy" decoding="async">
+    <img src="./03_sessionC_dialogue.jpeg" alt="개인 발표 — '이런 대화부터 시작했어요' 슬라이드" loading="lazy" decoding="async">
     <figcaption>"맛집 가이드를 만들어 본다면 어떨까?" 작은 대화에서 시작된 3일간의 실험.</figcaption>
   </figure>
 
@@ -1019,7 +1112,7 @@ hr {
   </div>
 
   <figure>
-    <img src="./03_세션C_문제해결.jpeg" alt="'고질적인 문제 셋, 저는 이렇게 풀어요' — 환각, 대화 실패, 반복 작업 해결 방식 슬라이드" loading="lazy" decoding="async">
+    <img src="./03_sessionC_problem.jpeg" alt="'고질적인 문제 셋, 저는 이렇게 풀어요' — 환각, 대화 실패, 반복 작업 해결 방식 슬라이드" loading="lazy" decoding="async">
     <figcaption>"환각 / 대화 실패 / 반복 작업" — 부딪힌 문제마다 자기만의 해결 패턴을 정리했습니다.</figcaption>
   </figure>
 
@@ -1043,7 +1136,7 @@ hr {
   </div>
 
   <figure>
-    <img src="./03_세션C_청중컷.jpeg" alt="개인 발표를 듣고 있는 청중의 진지한 표정" loading="lazy" decoding="async">
+    <img src="./03_sessionC_audience.jpeg" alt="개인 발표를 듣고 있는 청중의 진지한 표정" loading="lazy" decoding="async">
     <figcaption>"내일 당장 시도해 볼 거리가 생겼다." 발표가 끝나자 메모하는 소리가 들렸습니다.</figcaption>
   </figure>
 
@@ -1051,14 +1144,21 @@ hr {
     <p>"개발을 잘하는 사람이 아니라, AI와 대화를 잘하는 사람이 만듭니다. 거창한 혁신보다 '한 번 만들어볼까?'라는 작은 시도가 AI를 만났을 때 가장 빠르게 힘을 발휘합니다."</p>
     <footer><cite>개인 발표 중</cite></footer>
   </blockquote>
+</div>
 
+<div class="interview-box">
+  <p class="interview-label"><img src="./ilo_face_outline@2x.png" alt="" class="inline-icon-sm">Session Notes</p>
+  <p class="interview-q">Q. 3일이라는 시간이 진짜 가능한 일인가요?</p>
+  <p class="interview-a">"막상 해보니 가장 오래 걸린 건 '뭘 만들지' 정하는 거였어요. 기획만 잡히면 만드는 건 생각보다 훨씬 빨랐어요. 의외로 가장 큰 적은 '완벽주의'였구요."</p>
+  <span class="interview-attribution">— 충전소 맛집 추천 웹앱 개인 발표자</span>
+</div>
   <!-- ───── SECTION D — Live Demo ───── -->
   <h2><span class="section-num">D 트랙 · Live Demo</span>지금, 여기서, 충전합니다</h2>
 
   <p>이론과 사례 공유만으로 끝나지 않았습니다. 세션의 마지막은 <strong>실시간 라이브 데모</strong>였습니다. 발표자가 무대 위에서 AI와 대화하며 작은 도구 하나를 처음부터 끝까지 만들어 보여주는 시간이었습니다.</p>
 
   <figure>
-    <img src="./04_LiveDemo.jpeg" alt="라이브 데모 — 코드 에디터 화면과 청중의 노트북·핸드폰이 함께 잡힌 장면" loading="lazy" decoding="async">
+    <img src="./04_livedemo.jpeg" alt="라이브 데모 — 코드 에디터 화면과 청중의 노트북·핸드폰이 함께 잡힌 장면" loading="lazy" decoding="async">
     <figcaption>"실패하면 다 함께 봅니다." 라이브로 진행된 AI 협업 데모.</figcaption>
   </figure>
 
@@ -1111,10 +1211,10 @@ hr {
 
   <div class="figure-grid">
     <figure>
-      <img src="./outro_청중몰입.jpeg" alt="세션 후반부에 발표를 집중해서 듣고 있는 워터 크루들" loading="lazy" decoding="async">
+      <img src="./outro_audience.jpeg" alt="세션 후반부에 발표를 집중해서 듣고 있는 워터 크루들" loading="lazy" decoding="async">
     </figure>
     <figure>
-      <img src="./outro_분위기.jpeg" alt="조명이 어두워진 세션장 — 발표가 점점 깊어지는 순간" loading="lazy" decoding="async">
+      <img src="./outro_atmosphere.jpeg" alt="조명이 어두워진 세션장 — 발표가 점점 깊어지는 순간" loading="lazy" decoding="async">
     </figure>
   </div>
 
@@ -1124,7 +1224,10 @@ hr {
 
   <!-- ───── OUTRO ───── -->
   <h2><span class="section-num">04</span>전기차 회사가 왜 이렇게 AI에 진심일까</h2>
-
+  <figure>
+    <img src="./water_china.jpeg" alt=" — 중국 워케이션 — 바이두본 견학 단체 참석 모습" loading="lazy" decoding="async">
+    <figcaption>"2026 중국 워케이션 - IT 기업 바이두 본사 견학 단체 참석 모습"</figcaption>
+  </figure>
   <p>글을 읽으시면서 이런 의문이 드실 수도 있습니다. <em>'전기차 충전기 만드는 회사에서 왜 이렇게 깊이 AI를 고민하지?'</em></p>
 
   <p>워터가 만드는 것은 단순한 충전기 하드웨어가 아닙니다. 고객에게 <strong>더 빠르고 편리한 최상의 충전 경험</strong>을 제공하기 위해서는, 이를 뒷받침하는 우리 내부의 일하는 방식 역시 최전선에서 진화해야 하기 때문입니다.</p>

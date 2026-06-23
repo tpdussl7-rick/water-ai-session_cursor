@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>완벽한 사례 대신, 직접 부딪힌 기록을 가져왔습니다 — 워터(Water) BXD 노트 Episode 02</title>
+<meta name="description" content="워터(Water) BXD팀이 직접 취재한 두 번째 AI Best Practice Session 현장 기록. 마케팅과 CXD, 두 팀이 한 달 동안 AI와 직접 부딪혀 본 기록. 그리고 이어진 자유 토론까지.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Water BXD팀">
+<meta name="theme-color" content="#0099ff">
+<link rel="canonical" href="aibp_episode02.html">
+<link rel="icon" href="./ilo_face_outline@2x.png" type="image/png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" href="./session_2/02_hero_poster_bxd.png" as="image" type="image/png">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="워터(Water) BXD Note">
+<meta property="og:title" content="완벽한 사례 대신, 직접 부딪힌 기록을 가져왔습니다">
+<meta property="og:description" content="워터 BXD팀이 직접 취재한 두 번째 AI Best Practice Session 현장 기록.">
+<meta property="og:url" content="aibp_episode02.html">
+<meta property="og:image" content="session_2/02_hero_poster_bxd.png">
+<meta property="og:image:alt" content="워터 AI Best Practice Session Vol.2 — BXD 포스터">
+<meta property="article:published_time" content="2026-06-04">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="완벽한 사례 대신, 직접 부딪힌 기록을 가져왔습니다">
+<meta name="twitter:description" content="워터 BXD팀이 직접 취재한 두 번째 AI Best Practice Session 현장 기록.">
+<meta name="twitter:image" content="session_2/02_hero_poster_bxd.png">
+<meta name="twitter:image:alt" content="워터 AI Best Practice Session Vol.2 — BXD 포스터">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --ink: #1A1A1A;
+  --ink-2: #2D2D2D;
+  --muted: #707070;
+  --muted-2: #9B9B9B;
+  --line: #E5E5E5;
+  --line-soft: #EFEFEF;
+  --bg: #f9f8fa;
+  --surface: #ffffff;
+  --tip-bg: #e0edff;
+  --tip-border: #0099ff;
+  --note-bg: #ffffff;
+  --note-border: #0099ff;
+  --hl: #C5E7FA;
+  --accent: #0099ff;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  line-height: 1.85;
+  color: var(--ink);
+  background: var(--bg);
+  margin: 0;
+  padding: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 6px 6px;
+}
+.skip-link:focus { top: 0; outline: 3px solid var(--accent); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+:focus:not(:focus-visible) { outline: none; }
+
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: max(80px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(80px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+}
+
+@media (max-width: 768px) {
+  .article { padding: max(48px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)); }
+  body { font-size: 15px; }
+}
+
+/* Header */
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+h1 {
+  font-size: clamp(22px, 5vw, 28px);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+.subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+.subtitle h3 {
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 16px 0 32px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+.meta .author { font-weight: 600; color: var(--ink-2); }
+.meta .dot { color: var(--muted-2); user-select: none; }
+.meta time { font-variant-numeric: tabular-nums; }
+
+/* Hero */
+.hero { margin: 0 0 40px; }
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.hero .hero-poster {
+  margin-bottom: 0;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+.hero-quote {
+  margin: 48px 6%;
+  padding: 0;
+  text-align: center;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.hero-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+@media (max-width: 768px) {
+  .hero-quote { margin: 32px 4%; font-size: 1.2rem; }
+}
+
+/* Body */
+h2 {
+  font-size: 20px;
+  color: var(--ink);
+  margin: 56px 0 16px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+}
+.section-num {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+h3 {
+  font-size: 17px;
+  color: var(--ink);
+  margin: 32px 0 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+h4 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 24px 0 6px;
+}
+p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  margin: 0 0 18px;
+}
+p strong, li strong { color: var(--ink); font-weight: 600; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Highlight */
+.text-highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--hl) 55%);
+  padding: 0 1px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Figures */
+figure { margin: 28px 0; text-align: center; }
+figure img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+}
+figcaption {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.figure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 28px 0;
+}
+.figure-grid figure { margin: 0; }
+@media (max-width: 600px) { .figure-grid { grid-template-columns: 1fr; } }
+
+/* Video embeds */
+.video-frame {
+  margin: 28px 0;
+  text-align: center;
+}
+.video-frame video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.video-frame figcaption {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.video-eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+}
+.video-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 28px 0;
+}
+.video-gallery .video-frame { margin: 0; text-align: left; }
+.video-gallery .video-eyebrow {
+  font-size: 9px;
+  padding: 2px 6px;
+  margin-bottom: 6px;
+}
+.video-gallery figcaption {
+  font-size: 11px;
+  text-align: left;
+  margin-top: 8px;
+}
+@media (max-width: 600px) {
+  .video-gallery { grid-template-columns: 1fr; }
+}
+
+/* Pullquote */
+.pullquote {
+  margin: 36px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--ink);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+.pullquote p { margin: 0; font-size: inherit; font-weight: inherit; color: inherit; line-height: inherit; }
+.pullquote footer, .pullquote cite {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  font-style: normal;
+}
+.pullquote footer cite { margin-top: 0; }
+
+/* Callouts */
+.callout {
+  margin: 24px 0;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.callout.tip { background: var(--tip-bg); border-left: 3px solid var(--tip-border); }
+.callout.note { background: var(--note-bg); border-left: 3px solid var(--note-border); }
+.callout strong { font-weight: 600; color: var(--ink); margin-right: 4px; }
+.callout p { margin: 0; font-size: inherit; line-height: inherit; }
+
+/* Lists */
+ul.simple-list, ol.simple-list { margin: 16px 0 24px; padding-left: 20px; }
+ul.simple-list li, ol.simple-list li {
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+/* Tech list */
+.tech-list { margin: 24px 0; border-top: 1px solid var(--line); }
+.tech-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+@media (max-width: 600px) { .tech-row { grid-template-columns: 1fr; gap: 4px; } }
+.tech-row .role { font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+.tech-row .tool { color: var(--ink-2); line-height: 1.65; }
+.tech-row .tool strong { color: var(--ink); }
+
+/* Brand colors for tool names */
+.tech-row .role {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tech-row .role svg.tool-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.tech-row .role.brand-claude   { color: #D97757; }   /* Anthropic orange */
+.tech-row .role.brand-gemini   { color: #4285F4; }   /* Google blue */
+.tech-row .role.brand-gpt      { color: #1A1A1A; }   /* Black */
+.tech-row .role.brand-lovable  { color: #FF4E8B; }   /* Lovable pink */
+.tech-row .role.brand-manifest { color: #1A1A1A; }   /* Black */
+.tech-row .role.brand-supabase { color: #3ECF8E; }   /* Supabase green */
+
+/* Field Report wrapper — magazine-style emphasis without a box */
+.field-report {
+  margin: 48px 0;
+  padding: 24px 0 8px;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.field-report .field-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.field-report .field-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+.field-report .field-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+.field-report .field-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 20px;
+  line-height: 1.65;
+}
+.field-report .tech-list {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.field-report .tech-list .tech-row:last-child {
+  border-bottom: none;
+}
+
+/* Track table */
+.track-table { margin: 20px 0 36px; border-top: 1px solid var(--line); }
+.track-row {
+  display: grid;
+  grid-template-columns: 28px 130px 1fr;
+  gap: 14px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.track-row.head {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+.track-letter { font-weight: 700; color: var(--accent); font-size: 13px; }
+.track-presenter { font-weight: 600; color: var(--ink); }
+.track-topic { color: var(--ink-2); line-height: 1.55; }
+@media (max-width: 600px) {
+  .track-row { grid-template-columns: 28px 1fr; }
+  .track-row .track-topic { grid-column: 2; padding-top: 4px; }
+  .track-row.head { display: none; }
+}
+
+/* Code block */
+.code-block {
+  background: var(--ink);
+  color: #E5E5E5;
+  padding: 16px 18px;
+  border-radius: 6px;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 20px 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.code-block .comment { color: #888; }
+.code-block .key { color: #7BA7E1; }
+.code-block .fail { color: #E07B7B; }
+.inline-code {
+  background: #F1F1F1;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 0.85em;
+  color: #C53030;
+}
+
+/* Step block */
+.step { margin: 20px 0; }
+.step-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.step-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+.step p { margin: 0; }
+
+/* Impact rows */
+.impact-list { margin: 20px 0; border-top: 1px solid var(--line); }
+.impact-row-min {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  align-items: baseline;
+}
+.impact-row-min .area { color: var(--muted); font-size: 13px; }
+.impact-row-min .after { color: var(--ink-2); font-weight: 500; }
+.impact-row-min .after strong { color: var(--ink); font-weight: 700; }
+@media (max-width: 600px) {
+  .impact-row-min { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 56px 0;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 0 0 80px;
+  height: 1px;
+  background: var(--line);
+  margin: 0 16px;
+}
+.divider-icon { height: 30px; width: auto; display: block; }
+
+/* Inline icons */
+.inline-icon-sm {
+  height: 14px;
+  width: auto;
+  vertical-align: -3px;
+  display: inline-block;
+  margin-right: 4px;
+}
+.inline-icon-md {
+  height: 18px;
+  width: auto;
+  vertical-align: -4px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* Interview box */
+.interview-box {
+  margin: 32px 0 40px;
+  padding: 22px 26px 20px;
+  background: var(--note-bg);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+.interview-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.interview-q {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+.interview-a {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.7;
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+.interview-attribution {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Stats card */
+.stats-card {
+  margin: 36px 0 48px;
+  padding: 32px 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.stats-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin: 0 0 6px;
+  text-align: center;
+  line-height: 1.4;
+}
+.stats-card-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 32px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 16px;
+}
+.stat-item { text-align: center; }
+.stat-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted-2);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.stat-num {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+  min-height: 56px;
+}
+.stat-cat {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin: 8px 0 4px;
+}
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.55;
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+  .stat-num { min-height: auto; font-size: 18px; }
+  .stats-card { padding: 24px 16px 20px; }
+}
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
+
+/* Next episode */
+.next-episode {
+  margin: 56px 0 32px;
+  padding: 32px 28px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  text-align: center;
+  background: linear-gradient(180deg, transparent 0%, #FAFCFF 100%);
+}
+.next-episode .next-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.next-episode .next-title {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.next-episode .next-hint {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+hr { border: 0; height: 1px; background: var(--line); margin: 48px 0; }
+
+/* Footer */
+.byline {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.byline .avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: #E8F4FD;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.byline .avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.byline .info strong {
+  display: block;
+  color: var(--ink);
+  margin-bottom: 2px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 32px;
+  padding: 0;
+  list-style: none;
+}
+.tags li { display: contents; }
+.tag {
+  display: inline-block;
+  padding: 6px 12px;
+  min-height: 32px;
+  font-size: 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-weight: 400;
+}
+.article-footer { margin-top: 0; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "완벽한 사례 대신, 직접 부딪힌 기록을 가져왔습니다",
+  "description": "워터(Water) BXD팀이 직접 취재한 두 번째 AI Best Practice Session 현장 기록.",
+  "image": "session_2/02_hero_poster_bxd.png",
+  "datePublished": "2026-06-04",
+  "author": { "@type": "Organization", "name": "Water BXD팀" },
+  "publisher": { "@type": "Organization", "name": "워터(Water)" },
+  "inLanguage": "ko-KR",
+  "articleSection": "AI Best Practice Series",
+  "keywords": ["AI", "워터", "전기차충전", "사내문화", "Claude", "Gemini", "Lovable", "디자인AI"]
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+<main id="main-content" class="article">
+<article>
+
+  <!-- ───── HEADER ───── -->
+  <header>
+    <span class="eyebrow">Water · BXD Note · Episode 02</span>
+    <h1>완벽한 사례 대신, 직접 부딪힌 기록을 가져왔습니다</h1>
+    <p class="subtitle">
+      마케팅과 CXD, 두 팀이 한 달 동안 AI와 함께 만들고 부딪힌 기록
+      <h3>두 번째 AI Best Practice Session 현장 노트</h3>
+    </p>
+    <div class="meta">
+      <span class="author">Water BXD팀</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <span>AI Best Practice Series</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <time datetime="2026-06-04">2026.06.04</time>
+      <span class="dot" aria-hidden="true">·</span>
+      <span><img src="./ilo_face_outline@2x.png" alt="" width="28" height="28" class="inline-icon-sm" aria-hidden="true" decoding="async">17분 충전</span>
+    </div>
+  </header>
+
+  <!-- HERO — BXD Vol.2 포스터 + pull quote + 연간 로드맵 -->
+  <figure class="hero">
+    <div class="hero">
+      <img src="./session_2/02_hero_poster_bxd.png" alt="워터 AI Best Practice Session Vol.2 — BXD 포스터" class="hero-poster">
+
+      <blockquote class="hero-quote">
+        “완벽하게 만들지 마세요.<br>일단 작동하는 버전부터 만들어 보세요.”
+        <cite>— 워터의 두 번째 AI Best Practice Session</cite>
+      </blockquote>
+
+      <img src="./session_2/02_annual_roadmap.jpeg" alt="워터 AI Best Practice 연간 로드맵 — Kick-off부터 Awards까지 1년 프로그램의 전체 구조">
+    </div>
+  </figure>
+
+  <!-- ───── INTRO ───── -->
+  <p>안녕하세요, 워터(Water) <strong>BXD팀</strong>입니다.</p>
+
+  <p>지난 5월, 첫 번째 AI Best Practice Session의 열기를 기억하시나요? 한 달 후, 6월 4일 목요일 오후. <span class="text-highlight">두 번째 세션</span>이 다시 열렸습니다. 이번에는 마케팅팀의 김다현 팀장님과 CXD팀의 백승기 팀장님이 들고 온 한 달간의 기록을 나누는 자리였습니다.</p>
+
+  <p>두 발표는 서로 다른 방식으로 같은 메시지를 보여줬습니다. 마케팅팀은 <strong>"잘 된 사례보다 망한 썰이 더 배움이 된다"</strong>는 솔직한 고백으로, CXD팀은 <span class="text-highlight">"AI가 잘하는 일과 사람이 잘하는 일을 어떻게 나눌 것인가"</span>라는 본질적인 질문으로요. 두 팀 모두 결국엔 — 직접 부딪혀 봐야 보이는 것들이 있다는 이야기였어요.</p>
+
+  <p>오늘 BXD팀이 직접 취재해 들고 온 이야기, 두 번째 AI Best Practice Session 현장 기록을 시작합니다.</p>
+
+  <div class="figure-grid">
+    <figure>
+      <img src="./session_2/02_intro_award.jpeg" alt="5월 베스트 프랙티스 팀 시상 — 운영관리팀" loading="lazy" decoding="async">
+    </figure>
+    <figure>
+      <img src="./session_2/02_award_audience.jpeg" alt="수상을 함께 박수로 축하하는 워터 크루들" loading="lazy" decoding="async">
+    </figure>
+  </div>
+
+  <!-- ───── 5월 시상 ───── -->
+  <h2><span class="section-num">Opening</span>5월의 첫 번째 베스트 프랙티스 팀이 발표됐습니다</h2>
+
+  <p>세션은 지난 5월 1회차 베스트 프랙티스 팀 시상으로 문을 열었습니다. <span class="text-highlight">압도적인 동료 투표 1위로 운영관리팀이 첫 번째 수상</span>의 영광을 안았습니다. 첫 회차에서 비개발자로서 AS 관리 시스템을 직접 만들어낸 그 사례가 워터 크루들에게 큰 울림을 줬다는 평가였어요.</p>
+
+  <aside class="callout tip" role="note" aria-label="대표님 한마디">
+    <strong>💡 시상에 앞서 한마디</strong>
+    <p>"이걸로 우리가 평가를 하거나 부서·개인 평가에 <strong>포지티브하게는 보겠지만, 네거티브하게 보지는 않습니다.</strong> 운영관리팀이 너무 잘해주셔서 다른 부서들에 허들이 되고 있는 것 같은데, 굳이 그럴 필요 없어요. <span class="text-highlight">간단한 사고 전환에 활용할 수 있는 아이디어 공유, 심지어 프롬프트 공유 정도만 되더라도 충분히 의미가 있다는 생각에서 시작한 거니까요.</span>" — 대표</p>
+  </aside>
+
+  <p>그리고 또 하나의 메시지가 이어졌습니다. AI 툴을 활용할 때 발생하는 비용은 케이스별로 자유롭게 개진해 달라는 안내였어요. 부서마다 필요한 툴이 다르고 우선순위도 다르니, 일괄 결제보다 개별 승인 방식으로 가겠다는 결정이었습니다.</p>
+
+  <figure>
+    <img src="./session_2/02_award_certificate.jpg" alt="5월 Best Practice 수상장 — 운영관리팀" loading="lazy" decoding="async">
+    <figcaption>"실무 상 문제를 정확히 정의하고, 적절한 AI 활용 방법을 기반으로 탁월한 성과 및 결과물을 이끌어내는 등 빛나는 역량을 보여주었기에." — 첫 수상장 문구.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./session_2/02_award_panel.jpeg" alt="5월 첫 베스트 프랙티스 팀으로 수상한 운영관리팀 — 수상장 슬라이드 앞에 앉아 있는 모습" loading="lazy" decoding="async">
+    <figcaption>수상의 주인공 — 운영관리팀. 첫 회차에서 비개발자로 AS 관리 시스템을 직접 만든 그 사례가 동료들의 마음을 움직였습니다.</figcaption>
+  </figure>
+
+  <!-- ───── SESSION STRUCTURE ───── -->
+  <h2><span class="section-num">01</span>이번 세션은 어떻게 구성됐을까</h2>
+
+  <p>이번 회차는 첫 번째 회차의 1시간 운영을 1시간 30분으로 확대했습니다. 이전 설문에서 "타이트한 운영도 좋지만, 발표자도 청중도 좀 더 편하게 호흡할 수 있는 시간이 필요하다"는 의견이 모였기 때문이에요. 그래서 이번엔 두 발표자의 본 발표 + 자유로운 QnA와 토론까지 자연스럽게 흐를 수 있는 구조였습니다.</p>
+
+  <div class="track-table" role="region" aria-label="세션 트랙 구성">
+    <div class="track-row head" aria-hidden="true">
+      <span>트랙</span><span>발표자</span><span>주제</span>
+    </div>
+    <div class="track-row">
+      <span class="track-letter">A</span>
+      <span class="track-presenter">마케팅팀<br><small style="color:var(--muted); font-weight:400;">김다현 팀장</small></span>
+      <span class="track-topic">망한 썰 — 워터 미디어 모니터링 대시보드 만들기</span>
+    </div>
+    <div class="track-row">
+      <span class="track-letter">B</span>
+      <span class="track-presenter">CXD팀<br><small style="color:var(--muted); font-weight:400;">백승기 팀장</small></span>
+      <span class="track-topic">CAXD — 디자이너가 AI를 대하는 5가지 방법</span>
+    </div>
+    <div class="track-row">
+      <span class="track-letter">C</span>
+      <span class="track-presenter">Free Talk</span>
+      <span class="track-topic">환각, 평균값, 그리고 설계자의 시대</span>
+    </div>
+  </div>
+
+  <!-- ───── SECTION A — 마케팅팀 김다현 ───── -->
+  <h2><span class="section-num">A 트랙 · 마케팅팀</span>잘 된 사례보단, 망한 썰이 더 배움이 됩니다</h2>
+
+  <p>"여러 가지 아티클들을 읽다 보면 잘 된 사례는 솔직히 좀 꼴 보기 싫고요. 망한 썰들이 사실 가장 많은 도움을 주는 것 같아서, 망한 썰 위주로 좀 준비했습니다." 마케팅팀 김다현 팀장님의 첫 마디가 세션장의 분위기를 단번에 바꿔놨습니다.</p>
+
+  <figure>
+    <img src="./session_2/02_sessionA_open.jpeg" alt="마케팅팀 발표 시작 — '망한썰 위주로 준비했습니다' 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"잘 된 사례 말고, 망한 썰 위주로 준비했습니다." 발표는 솔직한 고백으로 시작했습니다.</figcaption>
+  </figure>
+
+  <h3>주눅들 필요는 없지만, 필요한 태도는 있다</h3>
+
+  <p>요즘 SNS에는 "AI 안 쓰면 도태된다", "Claude Code 안 쓰면 퇴사 준비하세요" 같은 압박성 콘텐츠가 가득합니다. 김다현 팀장님은 그런 글들에 일부러 거리를 두면서 시작했어요. <span class="text-highlight">"주눅들 필요는 없어요. 하지만 개인적으로 필요한 태도는 있다고 생각합니다."</span></p>
+
+  <ul class="simple-list">
+    <li><strong>1. 내가 뭘 해결하고 싶은지부터.</strong> 툴은 일주일에 한 번씩 업데이트돼서 다 따라갈 수 없어요. 유행을 따라가기보다, 내가 해결하고 싶은 문제부터 충분히 고민하는 게 먼저입니다.</li>
+    <li><strong>2. 일단 작동하는 버전부터.</strong> A부터 Z까지 완벽하게 만들 거야 보다는, 한 번 작동해 보는 버전을 먼저 만드는 게 필요합니다.</li>
+    <li><strong>3. 코딩 마스터는 X, 작동 원리는 O.</strong> 직접 코딩을 익힐 필요는 없지만, 모르는 게 있으면 AI에 물어보는 성의는 필요해요. 작동 원리는 알아야 합니다.</li>
+    <li><strong>4. AI는 기획 파트너로.</strong> "이거 만들어줘"가 아니라 "왜?"라는 질문을 자주 던지세요. 메타인지가 되면서 그제야 내 것이 됩니다.</li>
+  </ul>
+
+  <figure>
+    <img src="./session_2/02_sessionA_attitude.jpeg" alt="개발자가 될 필요는 없지만, 작동 원리 정도는 물어보는 성의는 필요하다 — 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"개발자가 될 필요는 없지만, '작동 원리' 정도는 물어보는 성의는 필요." 한 줄 정리.</figcaption>
+  </figure>
+
+  <h3>도전 — 워터 미디어 모니터링 대시보드</h3>
+
+  <p>김다현 팀장님이 한 달간 도전한 과제는 <strong>전기차 충전 업계 미디어 모니터링 대시보드</strong>를 직접 만드는 것이었습니다. 기존에는 팀즈로 산발적으로 공유되는 기사들을 일일이 수동으로 확인해야 했고, 채팅 기반이라 세이빙도 어려웠어요. "그때 얘기했었던 그 URL, 그걸로 한번 영상해볼까요?"라고 하면 아무도 이해를 못하는 상황의 반복.</p>
+
+  <figure>
+    <img src="./session_2/02_sessionA_motivation.jpeg" alt="시작은 단순한 '불편함'부터 — 발표 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"시작은 단순한 '불편함'부터." 채널이 없어 매번 직접 열어봐야 했던 그 작은 비효율이 출발점이었습니다.</figcaption>
+  </figure>
+
+  <div class="step">
+    <span class="step-label">발의</span>
+    <span class="step-title">상용 분석 툴은 너무 비쌌습니다</span>
+    <p>처음엔 상용 소셜 분석 툴을 검토했습니다. 하지만 너무 고가에 비즈니스 요금제까지 있어서 도입이 어려웠어요. <span class="text-highlight">"갓생 살기" 아티클을 보고 "이 정도는 할 수 있지 않을까?"라는 생각으로 직접 만들기에 도전</span>했습니다.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">시도</span>
+    <span class="step-title">매니페스트로 그럴싸하게 시작</span>
+    <p>먼저 <strong>매니페스트(Manifest)</strong>로 기능 기획서부터 만들었습니다. 와이어프레임까지 자동으로 짜주는 서비스라 "이거 될 것 같은데?" 싶은 자신감이 붙었어요. 200만 원 정도 들이면 가능할 줄 알았던 자신감.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">실행</span>
+    <span class="step-title">Claude + Lovable + Supabase + Gemini API 조합</span>
+    <p>그리고 본격적으로 조립을 시작했습니다. <strong>Claude AI</strong>를 메인 파트너로, <strong>Lovable</strong>로 UI를 만들고, <strong>Supabase</strong>로 DB를 두고, <strong>Gemini API</strong>로 콘텐츠 아이디어를 뽑는 구조였어요. 유튜브 / 네이버 / 구글 API까지 연동해 미디어 정보를 수집했습니다.</p>
+  </div>
+
+  <figure>
+    <img src="./session_2/02_sessionA_architecture.jpeg" alt="코딩 대신, AI 서비스를 블록처럼 조립하는 방식 — 아키텍처 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"코딩 대신, AI 서비스를 블록처럼 조립하는 방식." Claude(Orchestrator) → 수집 모듈 → Supabase → Gemini API → Lovable.</figcaption>
+  </figure>
+
+  <h3>한 달 만에 완성된 데일리 브리핑 대시보드</h3>
+
+  <p>"대시보드를 이렇게 만들었습니다. 실제로 한번 보여드릴게요." 발표 중반, 김다현 팀장님이 데모를 켰을 때 좌중이 가장 집중했던 순간이에요. 정말 작동하는 시스템이었거든요.</p>
+
+  <figure class="video-frame">
+    <span class="video-eyebrow">▶ Live Demo · Main</span>
+    <video controls muted playsinline preload="metadata"
+           poster="./session_2/02_sessionA_dashboard.jpeg">
+      <source src="./session_2/02_sessionA_demo_02.mp4" type="video/mp4">
+      이 브라우저에서는 영상을 재생할 수 없습니다.
+    </video>
+    <figcaption><strong>워터 데일리 브리핑 대시보드 시연 (2분 37초)</strong> — "오늘의 전기차 충전 주요 이슈"부터 유튜브 채널, AI 콘텐츠 아이디어까지 한 화면에 모이는 메인 대시보드.</figcaption>
+  </figure>
+
+  <p>한 달 후 작동한 데일리 브리핑 대시보드는 의외로 다채로웠습니다.</p>
+
+  <ul class="simple-list">
+    <li><strong>오늘의 전기차 충전 이슈</strong> — 워터·충전 업계 키워드로 선별된 메인 기사</li>
+    <li><strong>유튜브 채널 모니터링</strong> — 완성차, 전기차, 해외 충전, 인플루언서 채널 자동 수집</li>
+    <li><strong>주간/격주 동영상 정리</strong> — 2주치 콘텐츠를 한 번에 훑기</li>
+    <li><strong>미디어·완성차 기사</strong> — 키워드(수입차·전기차·전기차충전)로 분류</li>
+    <li><strong>콘텐츠 아이디어 자동 생성</strong> — Gemini API와 연동, 일 15개 한도</li>
+    <li><strong>저장 기능</strong> — 까먹지 않게 아이디어와 관심 채널을 저장</li>
+  </ul>
+
+  <h3>그리고… 망한 부분들</h3>
+
+  <p>"결론은 실패였습니다. 겉보기에는 되게 그럴싸했거든요." 김다현 팀장님은 망한 부분을 숨기지 않고 패턴화해서 보여줬어요.</p>
+
+  <div class="code-block"><span class="comment"># 망한 썰 — 패턴화</span>
+<span class="key">[1]</span> 그럴싸한 자동 기획       <span class="comment">→ 매니페스트가 만든 기획서, 실행 가서는 와장창</span>
+<span class="key">[2]</span> 무리한 조합               <span class="comment">→ Claude·Lovable·Supabase·Gemini 동시 조립</span>
+<span class="key">[3]</span> <span class="fail">별도 서버 충돌</span>            <span class="comment">→ Lovable이 자체 서버, Claude가 자체 서버, 연동 X</span>
+<span class="key">[4]</span> <span class="fail">API 쿼터 전소</span>             <span class="comment">→ 새로고침 한 번에 돈이 녹음</span>
+<span class="key">[5]</span> <span class="fail">커스텀 서치 API 중단</span>      <span class="comment">→ 갑작스런 지원 종료, 키 재발급으로 하루 통째 날림</span>
+<span class="key">[6]</span> <span class="fail">외부 API 막힘</span>             <span class="comment">→ 트위터/스레드/인스타/네이버 카페 전부 차단</span>
+<span class="key">[7]</span> <span class="fail">Claude Design 세션 녹음</span>   <span class="comment">→ 발표 자료 만들다가 하루 세션 두 번 결제</span></div>
+
+  <aside class="callout note" role="note" aria-label="망해서 배운 5가지">
+    <strong>📌 망해서 배운 5가지</strong>
+    <p style="margin-top: 8px;">
+      <strong>1. 플랫폼별 작동 원리를 정확히 알아야 에러를 푼다.</strong> 남들이 얘기하는 것만 따라가면 안 됩니다.<br><br>
+      <strong>2. AI도 최신 API나 정책을 모를 때가 있다.</strong> 다른 AI에 교차 검증을 시키거나, 내가 직접 확인하는 단계를 끼워야 해요.<br><br>
+      <strong>3. 상용 분석 툴이 왜 비싼지 이해된다.</strong> 트위터·인스타·네이버 카페 등은 외부 API를 막아둔 곳이 많고, 그걸 우회 수집해주는 게 상용 서비스의 가치입니다.<br><br>
+      <strong>4. 아키텍처별 역할을 명확히 인식해야 한다.</strong> Lovable은 UI(껍데기) 수정에 특화, Claude는 백엔드 로직과 문제 해결에 강력. 역할 분담이 명확해야 충돌을 줄일 수 있어요.<br><br>
+      <strong>5. 실패 비용이 획기적으로 낮아졌다.</strong> 예전엔 이런 대시보드를 만들려면 PM·마케터·개발자 등 TF 8명, 두세 달이 걸렸어요. 지금은 혼자, 2주에 만들 수 있습니다. 그러니까 — <span class="text-highlight">일단 시도해보세요.</span>
+    </p>
+  </aside>
+
+  <section class="field-report" aria-labelledby="field-report-title">
+    <p class="field-eyebrow">Field Report · 한 달 동안 부딪혀 본 6개 툴</p>
+    <h3 id="field-report-title" class="field-title">각 AI 툴의 성격을 직접 부딪혀 본 후기</h3>
+    <p class="field-desc">네 가지 AI를 동시에 굴린 김다현 팀장님이 정리한 각 툴의 특징입니다.</p>
+
+    <div class="tech-list">
+      <div class="tech-row">
+        <div class="role brand-claude">
+          <svg class="tool-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="20" height="20" rx="4.5" fill="#D97757"/>
+            <g fill="#FFF" stroke="#FFF" stroke-width="1.4" stroke-linecap="round">
+              <line x1="10" y1="4.5" x2="10" y2="15.5"/>
+              <line x1="4.5" y1="10" x2="15.5" y2="10"/>
+              <line x1="6.5" y1="6.5" x2="13.5" y2="13.5"/>
+              <line x1="13.5" y1="6.5" x2="6.5" y2="13.5"/>
+            </g>
+          </svg>
+          Claude
+        </div>
+        <div class="tool"><strong>문제 해결력 탁월.</strong> 맥락을 굉장히 잘 짚어내고, 캡처해서 "안 돼" 한 마디만 던져도 알아서 분석·제안해줍니다. 메인 파트너로 추천.</div>
+      </div>
+      <div class="tech-row">
+        <div class="role brand-gemini">
+          <svg class="tool-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="20" height="20" rx="4.5" fill="#4285F4"/>
+            <path d="M10 3 C10 6 12 9 17 10 C12 11 10 14 10 17 C10 14 8 11 3 10 C8 9 10 6 10 3 Z" fill="#FFF"/>
+          </svg>
+          Gemini
+        </div>
+        <div class="tool"><strong>정리·교차 검증에 강함.</strong> 코드 교차 검증은 Gemini에게 시켰습니다. 디테일하게 검증해주는 부분이 있어요. <strong>주의: API 가격이 만만치 않습니다(월 최소 2.2만 원).</strong></div>
+      </div>
+      <div class="tech-row">
+        <div class="role brand-gpt">
+          <svg class="tool-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="20" height="20" rx="4.5" fill="#FFF" stroke="#D5D5D5" stroke-width="0.7"/>
+            <g fill="none" stroke="#000" stroke-width="1.4" stroke-linecap="round">
+              <circle cx="10" cy="7.5" r="3"/>
+              <circle cx="7" cy="12" r="3"/>
+              <circle cx="13" cy="12" r="3"/>
+            </g>
+          </svg>
+          GPT
+        </div>
+        <div class="tool"><strong>올라운더, 단 답변이 고지식할 때 있음.</strong> 이번엔 코드 작업에서 거의 안 썼습니다. 다만 <strong>최근 이미지 생성 능력이 비약적으로 발전</strong>해서 디자인·아이디어 시각화에는 강력해졌어요.</div>
+      </div>
+      <div class="tech-row">
+        <div class="role brand-lovable">
+          <svg class="tool-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="20" height="20" rx="4.5" fill="#FF4E8B"/>
+            <path d="M10 15.5 C10 15.5 4 11.8 4 8 C4 6 5.6 4.4 7.6 4.4 C8.8 4.4 10 5.4 10 5.4 C10 5.4 11.2 4.4 12.4 4.4 C14.4 4.4 16 6 16 8 C16 11.8 10 15.5 10 15.5 Z" fill="#FFF"/>
+          </svg>
+          Lovable
+        </div>
+        <div class="tool"><strong>UI 빌더로 특화.</strong> "텍스트 바꿔줘", "하드 코딩 교체해줘" 같은 껍데기 수정엔 매우 빠릅니다. 다만 백엔드까지 같이 해결하려고 하면 자체 서버를 만들어버려서 충돌이 납니다.</div>
+      </div>
+      <div class="tech-row">
+        <div class="role brand-manifest">
+          <svg class="tool-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="20" height="20" rx="4.5" fill="#1B1A4D"/>
+            <g fill="#FFF">
+              <path d="M5 5.5 L5.6 7 L7.1 7.6 L5.6 8.2 L5 9.7 L4.4 8.2 L2.9 7.6 L4.4 7 Z"/>
+              <path d="M7.5 10.5 L7.9 11.4 L8.8 11.8 L7.9 12.2 L7.5 13.1 L7.1 12.2 L6.2 11.8 L7.1 11.4 Z"/>
+              <circle cx="14" cy="6" r="1" opacity="0.9"/>
+            </g>
+          </svg>
+          Manifest
+        </div>
+        <div class="tool">아이디어 → 문제 정의 → 와이어프레임까지 자동 생성. <strong>"있어 보이려고 한번 받아봤습니다."</strong> 결과적으론 실패였지만, 가시화 차원에서는 시도해볼 만하다는 평.</div>
+      </div>
+      <div class="tech-row">
+        <div class="role brand-supabase">
+          <svg class="tool-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0" y="0" width="20" height="20" rx="4.5" fill="#3ECF8E"/>
+            <path d="M11.5 3 L4.5 11 L9 11 L7.5 17 L15.5 9 L11 9 Z" fill="#FFF"/>
+          </svg>
+          Supabase
+        </div>
+        <div class="tool">백엔드 DB로 안정적. 무료 티어로 시작 가능해서 노코드 시스템 백엔드로 추천.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="figure-grid">
+    <figure>
+      <img src="./session_2/02_sessionA_speaker.jpeg" alt="마케팅팀 김다현 팀장 발표 정면 컷" loading="lazy" decoding="async">
+    </figure>
+    <figure>
+      <img src="./session_2/02_sessionA_audience.jpeg" alt="망한 썰을 들으며 진지하게 메모하는 청중들" loading="lazy" decoding="async">
+    </figure>
+  </div>
+
+  <p style="text-align: center; font-size: 13px; color: var(--muted); margin-top: -4px;">"망한 사례를 이렇게 솔직하게 공유해주시니까, 우리도 시도해볼 수 있겠다는 용기가 생겨요."</p>
+
+  <figure>
+    <img src="./session_2/02_sessionA_conclusion.jpeg" alt="완벽함보다 빠른 시도와 경험의 가치 — 마무리 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"완벽함보다 빠른 시도와 경험의 가치." 마무리는 세 가지 핵심 메시지로 — 문제 객관화, 기획 파트너로서의 AI, 경험의 축적.</figcaption>
+  </figure>
+
+  <blockquote class="pullquote">
+    <p>"이게 뭐 돈 아깝지 않냐고 하면, 저는 오히려 이런 실패를 해봐야 그다음에 세이브할 수 있다고 생각해요. 돈 아깝다기보다는 '이것도 기회 비용이다' 정도로 생각하시면 정신 건강에 좋습니다."</p>
+    <footer><cite>마케팅팀 김다현 팀장</cite></footer>
+  </blockquote>
+
+  <div class="interview-box">
+    <p class="interview-label"><img src="./ilo_face_outline@2x.png" alt="" class="inline-icon-sm">Session Notes</p>
+    <p class="interview-q">Q. 한 달 동안 들어간 시간과 비용은요?</p>
+    <p class="interview-a">"업무 외 시간으로 주말 포함 2주 정도 들었어요. Claude Max 이미 초과했고, Lovable 크레딧 추가 결제, Gemini API 월 구독, Claude Design 세션 두 번 녹아서 추가 결제까지. 그래도 PM·디자이너·개발자 8명이 두 달 걸려야 했던 일이 혼자 2주에 됐다는 게 굉장히 싸게 산 경험이라고 생각합니다."</p>
+    <span class="interview-attribution">— 마케팅팀 김다현 팀장</span>
+  </div>
+
+  <!-- ───── SECTION B — CXD팀 백승기 ───── -->
+  <h2><span class="section-num">B 트랙 · CXD팀</span>CAXD — 디자이너가 AI를 대하는 5가지 방법</h2>
+
+  <p>CXD팀 백승기 팀장님의 발표는 톤이 또 달랐습니다. "디자이너가 AI를 대하는 방법"이라는 제목 아래 팀명에 A(AI)를 더해 <strong>CAXD</strong>로 짓고, 팀에서 실제로 적용 중이거나 테스트 중인 5가지 사례를 차례로 공유했어요.</p>
+
+  <figure>
+    <img src="./session_2/02_sessionB_open.jpeg" alt="CXD팀 백승기 팀장 발표 — 'CAXD' 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"CAXD" = Collaborative · (AI) · Experience · Design. 팀명에 AI를 한 글자 더한 작은 선언으로 발표가 시작됐습니다.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./session_2/02_sessionB_contents.jpeg" alt="AI 활용 로드맵 — 5가지 콘텐츠" loading="lazy" decoding="async">
+    <figcaption>"AI 활용 로드맵" — 01 PQI 대시보드 / 02 디자인 가이드라인 플랫폼화 / 03 디자인 시뮬레이션 / 04 캐노피 컨셉 기획 / 05 충전소 환경 모델링.</figcaption>
+  </figure>
+
+  <h3>5가지 활용 사례</h3>
+
+  <div class="step">
+    <span class="step-label">사례 01</span>
+    <span class="step-title">PQI 대시보드 구조화 — 엑셀에서 HTML 대시보드로</span>
+    <p>PQI(품질평가표·시공점검표)는 충전소 자산 상태와 시공 퀄리티를 관리하는 CXD팀의 핵심 자료입니다. <span class="text-highlight">기존엔 현장 실사 → 엑셀 입력 → 업로드 → 대시보드 반영의 다단계 프로세스</span>였어요. 이걸 AI를 통해 HTML 대시보드로 전환 중입니다. 현장에서 상태를 바로 업데이트하면 웹으로 즉시 반영되는 구조. 이번 달 안으로 세팅을 시작할 예정입니다.</p>
+  </div>
+
+  <figure>
+    <img src="./session_2/02_sessionB_pqi.jpeg" alt="실시간 PQI 대시보드 전환 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"실시간 대시보드 전환." 엑셀에서 HTML 대시보드로 — As-Is / To-Be 비교까지 한 장에.</figcaption>
+  </figure>
+
+  <div class="step">
+    <span class="step-label">사례 02</span>
+    <span class="step-title">디자인 가이드라인의 플랫폼화 — PDF에서 양방향 웹으로</span>
+    <p>기존 가이드라인은 PDF로 배포하고 스크롤 열람하는 방식이었습니다. 이걸 <strong>웹 기반 양방향 플랫폼</strong>으로 전환 중이에요. 유관 부서뿐 아니라 협력사까지 링크로 접근 가능, 검색·다운로드·필터링 기능을 추가해 "문서 배포"가 아닌 "양방향 접근"으로 바뀝니다.</p>
+  </div>
+
+  <figure>
+    <img src="./session_2/02_sessionB_platform.jpeg" alt="PDF에서 웹 플랫폼으로 — 디자인 가이드라인 전환 슬라이드" loading="lazy" decoding="async">
+    <figcaption>"PDF에서 웹 플랫폼으로." 일방 배포에서 검색·다운로드까지 가능한 양방향 인터페이스로.</figcaption>
+  </figure>
+
+  <div class="step">
+    <span class="step-label">사례 03</span>
+    <span class="step-title">디자인 시뮬레이션 — 조명·재질·시간대를 10분 만에</span>
+    <p>기존엔 캐노피의 조명 각도 하나를 바꾸려면 모델링 → 렌더링 → 조명값 수정 과정을 거쳐 <strong>최소 수십 분~한 시간</strong>이 걸렸습니다. AI로는 프롬프트만 바꾸면 컬러·조명·재질·시간대·기후가 빠르게 비교돼요. 야간 사진으로 변경하는 데 <strong>10분도 안 걸립니다.</strong> 결과물이 실사 수준이라 의사결정 속도가 비교 불가.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">사례 04</span>
+    <span class="step-title">캐노피 콘셉트 기획 — Claude로 기획, ChatGPT로 시각화</span>
+    <p>제로 베이스에서 디자인 시안을 뽑는 단계에도 AI를 적용했습니다. 워크플로는 이렇습니다: <strong>Claude로 프로젝트 목표·구조·예산·소재·환경 조건을 정리</strong>해 MD 파일로 만들고, 그 파일을 들고 <strong>ChatGPT나 Gemini로 옮겨 이미지를 생성</strong>합니다. 기획서와 레퍼런스가 명확할수록 결과물 품질이 가파르게 올라가요.</p>
+  </div>
+
+  <div class="step">
+    <span class="step-label">사례 05</span>
+    <span class="step-title">충전 환경 모델링 — 사진을 3D로, 위성을 CAD로</span>
+    <p>가장 도전적인 사례. 현장 사진 → 3D 데이터로 변환, 위성 사진 → 평면도 CAD 파일로 변환을 테스트 중입니다. <strong>Polycam, Luma AI Capture</strong>를 활용하고, <strong>Claude MCP로 설계 툴과 연동</strong>하는 흐름을 실험 중. 위성 사진 확보 경로가 제한적인 게 현재 이슈입니다.</p>
+  </div>
+
+  <figure>
+    <img src="./session_2/02_sessionB_rendering.jpeg" alt="AI로 캐노피 디자인 렌더링 — 슬라이드와 미리보기" loading="lazy" decoding="async">
+    <figcaption>"디자인 렌더링." 초기 아이디에이션 단계에서 AI가 만들어낸 캐노피 콘셉트 1차 시안들.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./session_2/02_sessionB_roadmap.jpeg" alt="AI 활용 로드맵 요약 — 5가지 사례를 한 슬라이드에" loading="lazy" decoding="async">
+    <figcaption>"AI 활용 로드맵 요약." 5가지 사례를 한 장에 정리한 마무리 슬라이드.</figcaption>
+  </figure>
+
+  <h3>그래서, 무엇이 단축됐을까</h3>
+
+  <p>5가지 사례가 실무에서 만들어낸 변화입니다.</p>
+
+  <div class="impact-list">
+    <div class="impact-row-min">
+      <div class="area">PQI 입력</div>
+      <div class="after">엑셀 → 업로드 → 대시보드 → <strong>현장 즉시 입력 · 실시간 반영</strong></div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">가이드라인 배포</div>
+      <div class="after">PDF 일방 배포 → <strong>웹 검색 · 다운로드 · 협력사 접근</strong></div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">조명·재질 시뮬레이션</div>
+      <div class="after">렌더링 30분~1시간 → <strong>프롬프트 1분, 실사 퀄리티</strong></div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">초기 시안 작업</div>
+      <div class="after">레퍼런스 수집·시안화 1주 → <strong>1차 시안 1시간</strong></div>
+    </div>
+    <div class="impact-row-min">
+      <div class="area">현장 평면도</div>
+      <div class="after">관계자 입수 대기 → <strong>위성 사진 즉시 변환</strong></div>
+    </div>
+  </div>
+
+  <h3>잘하는 영역과 못하는 영역 — 일을 나누는 감각</h3>
+
+  <p>가장 인상 깊었던 인사이트는 "AI에 다 맡기지 말자"라는 자기 절제였습니다. 백승기 팀장님은 디자인 작업을 실제로 돌려본 후 명확한 결론에 도달했어요.</p>
+
+  <ul class="simple-list">
+    <li><strong>AI가 잘하는 것 — 방대한 데이터 분석, 리서치, 결과물 베이스 작업.</strong> "탁월합니다. 수준급 작업이 가능해요."</li>
+    <li><strong>인간이 잘하는 것 — 디자인 감성, 엉뚱한 발상, 의도치 않은 아이디어.</strong> "AI는 평균값으로 수용하는 경향이 있어서, 이쪽은 사람의 몫입니다."</li>
+    <li><strong>잘하는 영역은 맡기고, 못하는 영역은 사람이.</strong> "이 밸런스 조절이 일을 잘하는 데 있어서 중요한 시도라고 생각해요."</li>
+  </ul>
+
+  <div class="figure-grid">
+    <figure>
+      <img src="./session_2/02_sessionB_speaker.jpeg" alt="CXD팀 백승기 팀장 발표 — 손짓으로 설명 중" loading="lazy" decoding="async">
+    </figure>
+    <figure>
+      <img src="./session_2/02_sessionB_audience.jpeg" alt="CXD 발표를 진지하게 듣고 있는 청중" loading="lazy" decoding="async">
+    </figure>
+  </div>
+
+  <p style="text-align: center; font-size: 13px; color: var(--muted); margin-top: -4px;">"AI에 다 맡기지 말자" — 디자인 감성의 영역에서 균형감을 강조한 발표.</p>
+
+  <blockquote class="pullquote">
+    <p>"이제는 개개인이 부사수를 한 명씩 들이고 있다는 느낌이 커졌어요. 앞으로는 AI를 업무 효율과 디자인 품질을 향상시키는 실질적인 도구로 계속 발전시켜 나갈 생각입니다."</p>
+    <footer><cite>CXD팀 백승기 팀장</cite></footer>
+  </blockquote>
+
+  <div class="interview-box">
+    <p class="interview-label"><img src="./ilo_face_outline@2x.png" alt="" class="inline-icon-sm">Session Notes</p>
+    <p class="interview-q">Q. 디자이너의 프롬프트는 어떻게 다른가요?</p>
+    <p class="interview-a">"디자인 용어를 적극적으로 씁니다. '미니멀', '브랜딩 톤' 같은 일반인이 잘 안 쓰는 용어들. 그러면 디자인적으로 훨씬 가깝게 결과가 나와요. 심지어 '와꾸', '야마', '짜친다' 같은 비전문 용어도 잘 알아들어요. 수많은 사람들이 이미 AI를 교육시켜 놓은 것 같아요."</p>
+    <span class="interview-attribution">— CXD팀 백승기 팀장</span>
+  </div>
+
+  <!-- ───── SECTION C — Free Talk ───── -->
+  <h2><span class="section-num">C 트랙 · Free Talk</span>환각, 평균값, 그리고 설계자의 시대</h2>
+
+  <p>두 발표가 끝나고 자유 토론으로 흐른 시간. 발표보다 더 솔직하고 깊은 이야기들이 오갔어요. 이번 회차에서 가장 많은 메모가 쏟아진 시간이기도 했습니다.</p>
+
+  <figure>
+    <img src="./session_2/02_freetalk_qna.jpeg" alt="Q&A 자유 토론 슬라이드 — 청중과 발표자가 함께 대화하는 장면" loading="lazy" decoding="async">
+    <figcaption>"Q&amp;A." 정해진 발표 다 빠지고, 가장 솔직한 대화가 시작된 순간.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./session_2/02_freetalk_wide.jpeg" alt="자유 토론 시간 — 발표자와 청중이 자연스럽게 의견을 나누는 모습" loading="lazy" decoding="async">
+    <figcaption>마이크 없이도 자연스럽게 오간 자유 토론. "이번 회차의 진짜 하이라이트"라는 평이 많았습니다.</figcaption>
+  </figure>
+
+  <h3>대표가 직접 부딪힌 4가지 함정</h3>
+
+  <p>"여러분만큼 깊게 투입한 건 아니지만, 저도 요즘 꽤나 고난도 작업을 시도해보고 있어요." 대표가 직접 부딪힌 함정들이 토론의 시작이었습니다.</p>
+
+  <aside class="callout note" role="note" aria-label="AI 협업의 4가지 함정">
+    <strong>📌 부딪혀 보고 정리한 4가지 함정</strong>
+    <p style="margin-top: 8px;">
+      <strong>1. 환각 방어 모드</strong> — 만들어 놓은 결과물을 자기 논리로만 방어하기 시작하면 길을 잃습니다. "다른 창에서 너는 레드팀이라고 생각하고 비판해라"로 교차 검증을 시키지만, 그러다 보면 <em>"내가 원래 가던 길이 어디였지"</em>를 까먹는 일이 발생해요.<br><br>
+      <strong>2. 평균값 함정</strong> — AI는 기본적으로 평균값으로 수용합니다. 그래서 결과물의 신선함·차별화가 어려워요. 뉴스 포스팅에서 "어, 이거 AI 말투네"가 보이는 순간 더는 안 읽게 되는 것과 같은 맥락.<br><br>
+      <strong>3. 세션·토큰 관리</strong> — Claude Design을 한 번 돌리면 그날의 세션이 녹습니다. 발표 자료 만들다가 두 번 결제한 사례처럼, 작업 단위로 세션을 쪼개 쓰는 감각이 필요해요.<br><br>
+      <strong>4. 설계가 가장 어렵다</strong> — 일의 분배, 시간 분배, 언제 개입할지를 판단하는 설계. 이게 조금이라도 애매하면 산출물이 다 뭉개지면서 처음부터 다시 해야 합니다. <span class="text-highlight">"어디까지 시킬지 정의하는 능력, 어떤 타이밍에 개입할지 판단하는 능력 — 요즘 가장 중요한 능력이라는 생각이 들어요."</span>
+    </p>
+  </aside>
+
+  <h3>워터의 AI 활용 표준 워크플로</h3>
+
+  <p>토론 중 정리된 워터의 표준 워크플로입니다. 누가 무엇을 어떻게 하는지에 대한 합의된 감각.</p>
+
+  <div class="code-block"><span class="key">Step 1.</span> 과업 시작 전        <span class="comment">→ AI에게 "먼저 나에게 질문해라"라고 시킨다</span>
+<span class="key">Step 2.</span> 충분한 질문 후       <span class="comment">→ "다른 창에서 작업할 거니까 프롬프트를 써달라"</span>
+<span class="key">Step 3.</span> 새 창에서 실행       <span class="comment">→ 받아 온 프롬프트로 본 작업 진행</span>
+<span class="key">Step 4.</span> 결과물 교차 검증     <span class="comment">→ 다른 AI / 다른 창 / 다른 시각에서 비판 모드</span>
+<span class="key">Step 5.</span> 환각 점검            <span class="comment">→ 내가 원래 가던 길이 어디였는지 다시 확인</span></div>
+
+  <h3>"부사수가 한 명 생긴 느낌" vs "사수가 AI고 내가 부사수"</h3>
+
+  <p>가장 큰 웃음을 만든 대화. CXD팀 백승기 팀장님의 "부사수가 한 명 생긴 느낌"이라는 표현에, 누군가 즉시 받았어요. <span class="text-highlight">"저는 가끔 사수가 AI고 제가 부사수일 때가 있어요."</span> 좌중이 다 같이 끄덕였습니다.</p>
+
+  <blockquote class="pullquote">
+    <p>"중고나라 대표님이 직원 글쓰기를 다듬는 AI 윤문 도구를 만들어서, 내부 커뮤니케이션 글을 모두 3~4번 윤문해서 쓴다고 하더라고요. AI 루프에 가치 있는 글이 들어가는 거죠. 결국 이제는 <strong>설계자의 시대</strong>가 온 것 같아요."</p>
+    <footer><cite>자유 토론 중 · 대표</cite></footer>
+  </blockquote>
+
+  <div class="interview-box">
+    <p class="interview-label"><img src="./ilo_face_outline@2x.png" alt="" class="inline-icon-sm">Session Notes</p>
+    <p class="interview-q">Q. 자유 토론에서 가장 인상 깊었던 한마디는요?</p>
+    <p class="interview-a">"AI는 평균값으로 수용하는 설계라서, 결국 신선함은 사람의 영역으로 남는다는 말. 그리고 이제는 '설계자가 가장 중요한 직무'라는 깨달음. 두 마디가 머릿속에 남았습니다."</p>
+    <span class="interview-attribution">— 자유 토론에 참여한 워터 크루</span>
+  </div>
+
+  <div class="divider" role="presentation" aria-hidden="true"><img src="./ilo_face_outline@2x.png" alt="" width="60" height="60" class="divider-icon" decoding="async"></div>
+
+  <!-- ───── 시상 카드 ───── -->
+  <h2><span class="section-num">02</span>5월의 첫 베스트 프랙티스 팀</h2>
+
+  <p>이번 회차에서 발표된 5월 1회차 결과를 정리하면 다음과 같습니다.</p>
+
+  <section class="stats-card" aria-labelledby="award-card-title">
+    <h2 id="award-card-title" class="stats-card-title">5월 Best Practice Team</h2>
+    <p class="stats-card-subtitle">동료 투표 + 대표 평가 종합</p>
+    <div class="stats-grid" role="list">
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">01</span>
+        <span class="stat-num">운영<br>관리팀</span>
+        <span class="stat-cat">압도적 1위 수상</span>
+        <span class="stat-label">동료 투표 만점에 가까운 점수</span>
+      </div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">02</span>
+        <span class="stat-num">포지티브<br>ONLY</span>
+        <span class="stat-cat">평가 철학</span>
+        <span class="stat-label">네거티브 평가는 하지 않습니다</span>
+      </div>
+      <div class="stat-item" role="listitem">
+        <span class="stat-eyebrow">03</span>
+        <span class="stat-num">케이스별<br>승인</span>
+        <span class="stat-cat">AI 툴 비용 정책</span>
+        <span class="stat-label">개별 부서 필요에 맞춰 자율적으로</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" role="presentation" aria-hidden="true"><img src="./ilo_face_outline@2x.png" alt="" width="60" height="60" class="divider-icon" decoding="async"></div>
+
+  <!-- ───── OUTRO ───── -->
+  <h2><span class="section-num">03</span>시작은 작게, 변화는 함께</h2>
+
+  <figure>
+    <img src="./session_2/02_outro_thanks.jpeg" alt="'THANKS!' 마무리 슬라이드 앞에서 박수를 보내는 워터 크루들" loading="lazy" decoding="async">
+    <figcaption>1시간 30분 가까이 이어진 두 번째 세션의 마지막. 이번엔 분위기가 더 깊었습니다.</figcaption>
+  </figure>
+
+  <p>두 번째 세션을 관통한 메시지는 분명했습니다. <strong>완벽하게 만들려고 하지 말 것. 일단 작동하는 버전부터 만들 것. 그리고 망한 썰을 솔직하게 공유할 것.</strong></p>
+
+  <p>김다현 팀장님은 두 달에서 세 달 걸렸을 일을 혼자 2주에 시도해 봤고, 백승기 팀장님은 디자이너만의 감각으로 AI와의 일 분배를 정리했어요. 자유 토론에서는 <span class="text-highlight">"설계자가 가장 중요한 시대"</span>라는 인식이 만들어졌습니다.</p>
+
+  <p>BXD팀이 이번 회차에서 가장 자주 들은 단어는 <strong>"왜?"</strong>였습니다. 시키는 대로 따라가지 않고 "왜 그래야 하는데?"라고 질문하는 습관. 그 작은 태도 하나가 결국 워터의 AI 활용 깊이를 만드는 것 같아요.</p>
+
+  <blockquote class="pullquote">
+    <p>"무비판적으로 수용하기보다, '왜 그래야 되지?'라는 질문을 정말 자주 반복하면 그게 메타인지가 되면서 비로소 내 것이 됩니다."</p>
+    <footer><cite>마케팅팀 김다현 팀장</cite></footer>
+  </blockquote>
+
+  <p>대표가 처음 BP 세션 기획안에 적었던 마지막 문구는 <strong>"시작은 작게, 변화는 함께"</strong>였습니다. 이번 회차는 그 문장의 실천편 같았어요. 첫 회차에서 운영관리팀이 보여줬던 사례가 다른 팀에게 부담이 되지 않게, 누구나 자신의 보폭으로 시도할 수 있도록.</p>
+
+  <p>다음 충전은 7월에 시작됩니다. 이번엔 오후 시간으로, 더 여유로운 호흡으로요.</p>
+
+  <aside class="next-episode" aria-label="다음 에피소드 안내">
+    <span class="next-label"><img src="./ilo_face_outline@2x.png" alt="" width="36" height="36" class="inline-icon-md" aria-hidden="true" decoding="async">다음 충전은 곧 시작됩니다</span>
+    <strong class="next-title">Episode 03 · 7월 2일(목) 오후</strong>
+    <p class="next-hint">세 번째 AI Best Practice Session은 어떤 망한 썰과 잘된 썰이 함께할까요?<br>BXD팀이 다시 찾아옵니다 — 시작은 작게, 변화는 함께.</p>
+  </aside>
+
+</article>
+
+<footer class="article-footer">
+  <div class="byline">
+    <div class="avatar"><img src="./profile_bxd.png" alt="Water BXD팀 프로필" width="48" height="48" loading="lazy" decoding="async"></div>
+    <div class="info">
+      <strong>Water BXD팀 (Brand Experience Design)</strong>
+      <span>워터가 일하는 방식, 우리만의 문화, 그 안에서 만들어지는 이야기들을 사내외에 전합니다.</span>
+    </div>
+  </div>
+
+  <ul class="tags" aria-label="글 태그">
+    <li><span class="tag">AI</span></li>
+    <li><span class="tag">사내문화</span></li>
+    <li><span class="tag">망한썰</span></li>
+    <li><span class="tag">워터</span></li>
+    <li><span class="tag">전기차충전</span></li>
+    <li><span class="tag">Claude</span></li>
+    <li><span class="tag">Gemini</span></li>
+    <li><span class="tag">Lovable</span></li>
+    <li><span class="tag">디자인AI</span></li>
+  </ul>
+</footer>
+</main>
+</body>
+</html>
